@@ -6,13 +6,14 @@
 }
 
 :root {
-  --color-black: #0A0A0A;
+  --color-midnight: #0F1628;
+  --color-deep-navy: #1C2B4A;
+  --color-champagne: #C9A96E;
+  --color-ivory: #F8F6F1;
   --color-white: #FFFFFF;
-  --color-gray-100: #F5F5F5;
-  --color-gray-200: #E5E5E5;
-  --color-gray-400: #999999;
-  --color-gray-600: #666666;
-  --color-gray-800: #333333;
+  --color-gray-light: #E8E6E1;
+  --color-gray-text: #8899AA;
+  --color-gray-muted: #667799;
 }
 
 html {
@@ -20,7 +21,7 @@ html {
 }
 
 body {
-  @apply bg-white text-[#0A0A0A];
+  @apply bg-[#F8F6F1] text-[#0F1628];
 }
 
 /* Form input autofill reset */

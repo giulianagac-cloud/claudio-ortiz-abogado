@@ -28,7 +28,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-[#0A0A0A] transition-shadow duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 bg-[#0F1628] transition-shadow duration-300 ${
         scrolled ? "shadow-[0_2px_24px_rgba(0,0,0,0.5)]" : ""
       }`}
     >
@@ -36,9 +36,9 @@ export default function Navbar() {
         {/* Brand */}
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="text-white font-sans text-sm font-medium tracking-[2px] uppercase cursor-pointer bg-transparent border-none"
+          className="text-white font-sans text-base font-medium tracking-[2px] uppercase cursor-pointer bg-transparent border-none"
         >
-          CLAUDIO ORTIZ
+          AB. CLAUDIO ORTIZ
         </button>
 
         {/* Desktop nav */}
@@ -47,7 +47,7 @@ export default function Navbar() {
             <button
               key={link.href}
               onClick={() => handleLinkClick(link.href)}
-              className="text-[#999999] text-xs tracking-[1px] uppercase transition-colors duration-300 hover:text-white cursor-pointer bg-transparent border-none"
+              className="text-[#8899AA] text-sm tracking-[1px] uppercase transition-colors duration-300 hover:text-white cursor-pointer bg-transparent border-none"
             >
               {link.label}
             </button>
@@ -85,12 +85,12 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <nav className="md:hidden bg-[#0A0A0A] border-t border-[#1a1a1a] flex flex-col px-6 py-8 gap-6">
+        <nav className="md:hidden bg-[#0F1628] border-t border-[#1C2B4A] flex flex-col px-6 py-8 gap-6">
           {links.map((link) => (
             <button
               key={link.href}
               onClick={() => handleLinkClick(link.href)}
-              className="text-[#999999] text-sm tracking-[2px] uppercase text-left transition-colors duration-300 hover:text-white cursor-pointer bg-transparent border-none"
+              className="text-[#8899AA] text-sm tracking-[2px] uppercase text-left transition-colors duration-300 hover:text-white cursor-pointer bg-transparent border-none"
             >
               {link.label}
             </button>

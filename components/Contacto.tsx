@@ -54,55 +54,55 @@ export default function Contacto() {
   };
 
   const inputBase =
-    "w-full bg-transparent border-0 border-b border-[#555555] text-white placeholder-[#777777] py-3 text-sm font-light font-sans focus:outline-none focus:border-white transition-colors duration-300";
+    "w-full bg-transparent border-0 border-b border-[#2A3E5E] text-white placeholder-[#667799] py-3 text-base font-light font-sans focus:outline-none focus:border-white transition-colors duration-300";
 
   const labelBase =
-    "font-sans text-xs uppercase tracking-[1px] text-[#999999] block mb-2";
+    "font-sans text-sm uppercase tracking-[1px] text-[#8899AA] block mb-2";
 
   return (
-    <section id="contacto" className="bg-[#0A0A0A] py-16 md:py-28 lg:py-32">
+    <section id="contacto" className="bg-[#0F1628] py-16 md:py-28 lg:py-32">
       <div ref={sectionRef} className="max-w-6xl mx-auto px-6 md:px-8">
         {/* Encabezado */}
         <div className="mb-16 md:mb-20 fade-in">
-          <p className="font-sans text-xs text-[#777777] uppercase tracking-[3px] mb-4">
+          <p className="font-sans text-sm text-[#C9A96E] uppercase tracking-[3px] mb-4">
             CONTACTO
           </p>
-          <h2 className="font-serif text-4xl text-white font-normal mb-5">
+          <h2 className="font-serif text-5xl text-white font-normal mb-5">
             Hablemos
           </h2>
-          <div className="w-14 h-px bg-[#555555]" />
+          <div className="w-14 h-px bg-[#C9A96E]" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-20">
           {/* Info de contacto */}
           <div className="fade-in space-y-10">
-            <p className="font-sans text-base font-light text-[#AAAAAA] leading-relaxed max-w-sm">
+            <p className="font-sans text-lg font-light text-[#8899AA] leading-relaxed max-w-sm">
               ¿Necesita asesoramiento jurídico para su empresa? Complete el formulario
               o contáctenos directamente.
             </p>
 
             <div className="space-y-8">
               <div>
-                <p className="font-sans text-xs uppercase tracking-[2px] text-[#777777] mb-1">
+                <p className="font-sans text-sm uppercase tracking-[2px] text-[#8899AA] mb-1">
                   EMAIL
                 </p>
-                <p className="font-sans text-sm font-light text-[#CCCCCC]">
+                <p className="font-sans text-base font-light text-white">
                   info@claudioortiz.com
                 </p>
               </div>
               <div>
-                <p className="font-sans text-xs uppercase tracking-[2px] text-[#777777] mb-1">
+                <p className="font-sans text-sm uppercase tracking-[2px] text-[#8899AA] mb-1">
                   TELÉFONO
                 </p>
-                <p className="font-sans text-sm font-light text-[#CCCCCC]">
+                <p className="font-sans text-base font-light text-white">
                   +54 11 XXXX-XXXX
                 </p>
               </div>
               <div>
-                <p className="font-sans text-xs uppercase tracking-[2px] text-[#777777] mb-1">
+                <p className="font-sans text-sm uppercase tracking-[2px] text-[#8899AA] mb-1">
                   UBICACIÓN
                 </p>
-                <p className="font-sans text-sm font-light text-[#CCCCCC]">
+                <p className="font-sans text-base font-light text-white">
                   Buenos Aires, Argentina
                 </p>
               </div>
@@ -147,7 +147,8 @@ export default function Contacto() {
 
               <div>
                 <label htmlFor="empresa" className={labelBase}>
-                  Empresa <span className="normal-case text-[#555555]">(opcional)</span>
+                  Empresa{" "}
+                  <span className="normal-case text-[#2A3E5E]">(opcional)</span>
                 </label>
                 <input
                   id="empresa"
@@ -177,18 +178,18 @@ export default function Contacto() {
                 <button
                   type="submit"
                   disabled={formState === "sending" || formState === "sent"}
-                  className="font-sans text-sm text-white uppercase tracking-[2px] border border-white px-10 py-4 transition-all duration-300 hover:bg-white hover:text-[#0A0A0A] disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="font-sans text-base text-[#C9A96E] uppercase tracking-[2px] border border-[#C9A96E] px-10 py-4 transition-all duration-300 hover:bg-[#C9A96E] hover:text-[#0F1628] disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {formState === "sending" ? "ENVIANDO..." : "ENVIAR MENSAJE"}
                 </button>
 
                 {formState === "sent" && (
-                  <p className="mt-4 font-sans text-sm font-light text-[#AAAAAA]">
+                  <p className="mt-4 font-sans text-base font-light text-[#8899AA]">
                     Mensaje enviado correctamente. Nos pondremos en contacto a la brevedad.
                   </p>
                 )}
                 {formState === "error" && (
-                  <p className="mt-4 font-sans text-sm font-light text-[#999999]">
+                  <p className="mt-4 font-sans text-base font-light text-[#8899AA]">
                     Hubo un error. Intente nuevamente o escríbanos a{" "}
                     <span className="text-white">info@claudioortiz.com</span>.
                   </p>

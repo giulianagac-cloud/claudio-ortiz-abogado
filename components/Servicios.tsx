@@ -53,33 +53,33 @@ export default function Servicios() {
   }, []);
 
   return (
-    <section id="servicios" className="bg-white py-16 md:py-28 lg:py-32">
+    <section id="servicios" className="bg-[#F8F6F1] py-16 md:py-28 lg:py-32">
       <div ref={sectionRef} className="max-w-6xl mx-auto px-6 md:px-8">
         {/* Encabezado */}
         <div className="mb-16 md:mb-20 fade-in">
-          <p className="font-sans text-xs text-[#999999] uppercase tracking-[3px] mb-4">
+          <p className="font-sans text-sm text-[#C9A96E] uppercase tracking-[3px] mb-4">
             ÁREAS DE PRÁCTICA
           </p>
-          <h2 className="font-serif text-4xl text-[#0A0A0A] font-normal mb-5">
+          <h2 className="font-serif text-5xl text-[#0F1628] font-normal mb-5">
             Servicios
           </h2>
-          <div className="w-14 h-px bg-[#0A0A0A]" />
+          <div className="w-14 h-px bg-[#C9A96E]" />
         </div>
 
         {/* Grid de cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#E5E5E5]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#E8E6E1]">
           {servicios.map((servicio) => (
             <div
               key={servicio.numero}
-              className="bg-white p-8 fade-in group transition-colors duration-300 hover:bg-[#F5F5F5]"
+              className="bg-[#F8F6F1] p-8 fade-in group transition-colors duration-300 hover:bg-white"
             >
-              <span className="font-sans text-6xl font-extralight text-[#E5E5E5] block mb-6 leading-none group-hover:text-[#D0D0D0] transition-colors duration-300">
+              <span className="font-sans text-6xl font-extralight text-[#C9A96E] block mb-6 leading-none opacity-40 group-hover:opacity-70 transition-opacity duration-300">
                 {servicio.numero}
               </span>
-              <h3 className="font-sans text-sm font-medium uppercase tracking-[2px] text-[#0A0A0A] mb-4">
+              <h3 className="font-sans text-base font-medium uppercase tracking-[2px] text-[#0F1628] mb-4">
                 {servicio.titulo}
               </h3>
-              <p className="font-sans text-sm font-light text-[#666666] leading-relaxed">
+              <p className="font-sans text-base font-light text-[#667799] leading-relaxed">
                 {servicio.descripcion}
               </p>
             </div>

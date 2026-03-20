@@ -13,7 +13,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Claudio Ortiz — Asesoramiento en Derecho Corporativo",
+  title: "Abogado Claudio Ortiz — Asesoramiento en Derecho Corporativo",
   description:
     "Asesoramiento jurídico estratégico para empresas y PyMEs. Derecho societario, contratos, acuerdos de accionistas, marcas y patentes.",
 };
