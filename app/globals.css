@@ -5,6 +5,45 @@
   --font-sans: var(--font-inter), Arial, sans-serif;
 }
 
+:root {
+  --color-black: #0A0A0A;
+  --color-white: #FFFFFF;
+  --color-gray-100: #F5F5F5;
+  --color-gray-200: #E5E5E5;
+  --color-gray-400: #999999;
+  --color-gray-600: #666666;
+  --color-gray-800: #333333;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   @apply bg-white text-[#0A0A0A];
+}
+
+/* Form input autofill reset */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: #ffffff;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+  background-color: transparent !important;
+}
+
+/* Fade-in scroll reveal */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
 }

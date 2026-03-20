@@ -9,11 +9,13 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <Hero />
-      <Servicios />
-      <SobreMi />
-      <Contacto />
-      <Footer />
+      <main className="pt-16">
+        <Hero />
+        <Servicios />
+        <SobreMi />
+        <Contacto />
+        <Footer />
+      </main>
     </>
   );
 }
