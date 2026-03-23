@@ -38,7 +38,7 @@ export default function Navbar() {
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="text-white font-sans text-base font-medium tracking-[2px] uppercase cursor-pointer bg-transparent border-none"
         >
-          ORTIZ ALEJANDRE
+          AB. CLAUDIO ORTIZ
         </button>
 
         {/* Desktop nav */}

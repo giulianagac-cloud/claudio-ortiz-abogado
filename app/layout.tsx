@@ -13,9 +13,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Ortiz Alejandre — Derecho Corporativo para PyMEs",
+  title: "Abogado Claudio Ortiz — Asesoramiento en Derecho Corporativo",
   description:
-    "Asesoramiento jurídico estratégico para empresas y PyMEs. Derecho corporativo, gestión y transformación digital.",
+    "Asesoramiento jurídico estratégico para empresas y PyMEs. Derecho societario, contratos, acuerdos de accionistas, marcas y patentes.",
 };
 
 export default function RootLayout({
