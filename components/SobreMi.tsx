@@ -56,12 +56,22 @@ export default function SobreMi() {
 
           {/* Columna visual */}
           <div className="md:col-span-1 fade-in flex items-center justify-center">
-            <div className="w-full aspect-[3/2] overflow-hidden">
+            <div className="w-full aspect-[3/2] overflow-hidden relative">
+              {/* Video si existe, imagen como fallback */}
+              <video
+                src="/sobre-nosotros.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+                onError={(e) => { (e.currentTarget as HTMLVideoElement).style.display = "none"; }}
+              />
               <img
                 src="/equipo.jpg"
                 alt="Equipo Ortiz Alejandre"
-                className="w-full h-full object-cover"
-                style={{ objectPosition: "45% 60%" }}
+                className="w-full h-full object-cover absolute inset-0"
+                style={{ objectPosition: "45% 60%", zIndex: -1 }}
               />
             </div>
           </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import HeroBackground from "./HeroBackground";
 
 export default function Hero() {
   const [phase, setPhase] = useState(0);
@@ -26,20 +27,11 @@ export default function Hero() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{ background: "#07080F" }}
     >
-      {/* Video de fondo */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover"
-        src="/hero-video.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-      />
+      {/* Fondo SVG animado */}
+      <HeroBackground />
 
-      {/* Overlays */}
-      <div className="absolute inset-0" style={{ zIndex: 1, background: "linear-gradient(to right, rgba(7,8,15,0.88) 0%, rgba(7,8,15,0.72) 55%, rgba(7,8,15,0.5) 100%)" }} />
-      <div className="absolute inset-0" style={{ zIndex: 1, background: "linear-gradient(to bottom, rgba(7,8,15,0.1) 0%, rgba(7,8,15,0.0) 40%, rgba(7,8,15,0.65) 100%)" }} />
-      <div className="absolute inset-0" style={{ zIndex: 2, background: "rgba(10,18,50,0.25)", mixBlendMode: "multiply" }} />
+      {/* Overlay bottom fade */}
+      <div className="absolute inset-0" style={{ zIndex: 1, background: "linear-gradient(to bottom, rgba(7,8,15,0.0) 60%, rgba(7,8,15,0.8) 100%)" }} />
 
       {/* Corner marks */}
       {(["tl","tr","bl","br"] as const).map((pos) => (
