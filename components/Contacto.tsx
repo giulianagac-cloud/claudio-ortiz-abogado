@@ -87,7 +87,7 @@ export default function Contacto() {
                   EMAIL
                 </p>
                 <p className="font-sans text-base font-light text-white">
-                  info@claudioortiz.com
+                  consultas@ortizalejandre.com
                 </p>
               </div>
               <div>
@@ -95,7 +95,7 @@ export default function Contacto() {
                   TELÉFONO
                 </p>
                 <p className="font-sans text-base font-light text-white">
-                  +54 11 XXXX-XXXX
+                  +54 11 5640-0469
                 </p>
               </div>
               <div>
@@ -191,10 +191,17 @@ export default function Contacto() {
                 {formState === "error" && (
                   <p className="mt-4 font-sans text-base font-light text-[#8899AA]">
                     Hubo un error. Intente nuevamente o escríbanos a{" "}
-                    <span className="text-white">info@claudioortiz.com</span>.
+                    <span className="text-white">consultas@ortizalejandre.com</span>.
                   </p>
                 )}
               </div>
+
+              <p className="mt-6 font-sans text-xs font-light text-[#2A3E5E] leading-relaxed">
+                Los datos ingresados en este formulario son utilizados únicamente para responder su consulta. No se comparten con terceros. Puede solicitar la eliminación de sus datos en cualquier momento escribiendo a{" "}
+                <a href="mailto:consultas@ortizalejandre.com" className="text-[#8899AA] hover:text-white transition-colors duration-300">
+                  consultas@ortizalejandre.com
+                </a>.
+              </p>
             </form>
           </div>
         </div>

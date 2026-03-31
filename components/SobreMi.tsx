@@ -28,43 +28,41 @@ export default function SobreMi() {
   return (
     <section id="sobre-mi" className="bg-[#F8F6F1] py-16 md:py-28 lg:py-32">
       <div ref={sectionRef} className="max-w-6xl mx-auto px-6 md:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-16 lg:gap-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 lg:gap-24">
           {/* Columna de texto */}
-          <div className="md:col-span-3">
+          <div className="md:col-span-1">
             <div className="fade-in mb-12">
               <p className="font-sans text-sm text-[#C9A96E] uppercase tracking-[3px] mb-4">
                 TRAYECTORIA
               </p>
               <h2 className="font-serif text-5xl text-[#0F1628] font-normal mb-5">
-                Sobre mí
+                Sobre nosotros
               </h2>
               <div className="w-14 h-px bg-[#C9A96E]" />
             </div>
 
             <div className="space-y-6">
               <p className="fade-in font-sans text-lg font-light text-[#0F1628] leading-loose">
-                Con más de [X] años de experiencia en derecho corporativo, asesoro a
-                empresas y PyMEs en la toma de decisiones legales estratégicas.
+                Ortiz Alejandre es un espacio especializado en derecho corporativo para empresas. Liderado por profesionales con formación en abogacía y administración de empresas, el enfoque de trabajo integra lo legal con la dinámica propia de cada organización.
               </p>
               <p className="fade-in font-sans text-lg font-light text-[#0F1628] leading-loose">
-                Mi enfoque combina rigor técnico con una visión práctica del negocio,
-                entendiendo que cada solución jurídica debe alinearse con los objetivos
-                comerciales del cliente.
+                El objetivo no es solo resolver conflictos, sino anticiparlos y ordenar la estructura del negocio para que pueda sostener su crecimiento.
               </p>
               <p className="fade-in font-sans text-lg font-light text-[#0F1628] leading-loose">
-                He acompañado a empresas en procesos de constitución societaria,
-                reestructuración, negociación de acuerdos complejos y protección de
-                activos intangibles.
+                Cuando la organización lo requiere, también contamos con especialistas en herramientas de gestión y tecnología, entendiendo que el crecimiento también exige revisar cómo funciona lo que ya está en marcha.
               </p>
             </div>
           </div>
 
           {/* Columna visual */}
-          <div className="md:col-span-2 fade-in">
-            <div className="w-full aspect-[3/4] bg-[#E8E6E1] flex items-center justify-center">
-              <span className="font-sans text-xs text-[#8899AA] uppercase tracking-[2px]">
-                Foto
-              </span>
+          <div className="md:col-span-1 fade-in flex items-center justify-center">
+            <div className="w-full aspect-[3/2] overflow-hidden">
+              <img
+                src="/equipo.jpg"
+                alt="Equipo Ortiz Alejandre"
+                className="w-full h-full object-cover"
+                style={{ objectPosition: "45% 60%" }}
+              />
             </div>
           </div>
         </div>
