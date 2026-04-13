@@ -29,13 +29,14 @@ export default function Hero() {
         className="relative overflow-hidden pt-20 pb-16 px-6 md:px-12 lg:px-16"
         style={{ background: "#FBF9F4" }}
       >
-        {/* Textura de fondo — sutil, 12% opacidad */}
+        {/* Textura de fondo */}
         <div
-          className="absolute inset-0 bg-cover bg-center pointer-events-none"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
           style={{
             backgroundImage: "url('/hero-bg.jpg')",
             opacity: 0.35,
             mixBlendMode: "multiply",
+            zIndex: 0,
           }}
           aria-hidden="true"
         />
