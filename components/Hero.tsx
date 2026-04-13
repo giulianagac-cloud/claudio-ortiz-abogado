@@ -34,8 +34,8 @@ export default function Hero() {
           className="absolute inset-0 bg-cover bg-center pointer-events-none"
           style={{
             backgroundImage: "url('/hero-bg.jpg')",
-            opacity: 0.12,
-            filter: "grayscale(0.3)",
+            opacity: 0.35,
+            mixBlendMode: "multiply",
           }}
           aria-hidden="true"
         />
