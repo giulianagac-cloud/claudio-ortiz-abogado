@@ -26,10 +26,21 @@ export default function Hero() {
 
       {/* ── BLOQUE 1: Hero principal ── */}
       <div
-        className="pt-20 pb-16 px-6 md:px-12 lg:px-16"
+        className="relative overflow-hidden pt-20 pb-16 px-6 md:px-12 lg:px-16"
         style={{ background: "#FBF9F4" }}
       >
-        <div className="max-w-7xl mx-auto">
+        {/* Textura de fondo — sutil, 12% opacidad */}
+        <div
+          className="absolute inset-0 bg-cover bg-center pointer-events-none"
+          style={{
+            backgroundImage: "url('/hero-bg.jpg')",
+            opacity: 0.12,
+            filter: "grayscale(0.3)",
+          }}
+          aria-hidden="true"
+        />
+
+        <div className="relative z-10 max-w-7xl mx-auto">
 
           {/* Label metadata */}
           <p
