@@ -8,9 +8,10 @@ export default function Hero() {
   useEffect(() => {
     const t1 = setTimeout(() => setPhase(1), 200);
     const t2 = setTimeout(() => setPhase(2), 700);
-    const t3 = setTimeout(() => setPhase(3), 1300);
-    const t4 = setTimeout(() => setPhase(4), 1800);
-    return () => { [t1, t2, t3, t4].forEach(clearTimeout); };
+    const t3 = setTimeout(() => setPhase(3), 1100);
+    const t4 = setTimeout(() => setPhase(4), 1500);
+    const t5 = setTimeout(() => setPhase(5), 2000);
+    return () => { [t1, t2, t3, t4, t5].forEach(clearTimeout); };
   }, []);
 
   const show = (p: number) => phase >= p;
@@ -21,112 +22,109 @@ export default function Hero() {
   };
 
   return (
-    <section
-      id="hero"
-      className="min-h-screen flex items-center"
-      style={{ background: "#FBF9F4", paddingTop: 68 }}
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-10 w-full py-24 md:py-36">
+    <section id="hero" style={{ paddingTop: 68 }}>
 
-        {/* Title + Tagline */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 items-end mb-14">
+      {/* ── BLOQUE 1: Hero principal ── */}
+      <div
+        className="pt-20 pb-16 px-6 md:px-12 lg:px-16"
+        style={{ background: "#FBF9F4" }}
+      >
+        <div className="max-w-7xl mx-auto">
 
-          {/* Left: Big title (2/3) */}
-          <div className="md:col-span-2">
-            <p
-              className="font-sans uppercase mb-8"
-              style={{
-                fontSize: 10,
-                letterSpacing: "0.18em",
-                color: "#5C5E57",
-                opacity: show(1) ? 1 : 0,
-                transform: show(1) ? "translateY(0)" : "translateY(8px)",
-                transition: "opacity 0.8s ease, transform 0.8s ease",
-              }}
-            >
-              Derecho Corporativo · Buenos Aires
-            </p>
+          {/* Label metadata */}
+          <p
+            className="text-[11px] md:text-xs tracking-[3px] uppercase text-[#5C5E57] font-sans mb-10"
+            style={{
+              opacity: show(1) ? 1 : 0,
+              transform: show(1) ? "translateY(0)" : "translateY(8px)",
+              transition: "opacity 0.8s ease, transform 0.8s ease",
+            }}
+          >
+            Derecho Corporativo · PyMEs · Gestión &amp; Tecnología
+          </p>
 
-            <h1 style={{ margin: 0, lineHeight: 0.92 }}>
+          {/* Título principal */}
+          <div className="max-w-4xl">
+            <h1 className="m-0">
+              {/* Línea 1 */}
               <span
-                className="block font-serif font-normal"
+                className="block font-serif text-5xl md:text-7xl lg:text-8xl font-normal leading-[0.95] tracking-[-0.02em] text-[#31332C]"
                 style={{
-                  fontSize: "clamp(52px, 8vw, 104px)",
-                  color: "#31332C",
-                  letterSpacing: "-0.02em",
                   opacity: show(2) ? 1 : 0,
-                  transform: show(2) ? "translateY(0)" : "translateY(28px)",
+                  transform: show(2) ? "translateY(0)" : "translateY(24px)",
                   transition: "opacity 0.9s ease, transform 0.9s ease",
                 }}
               >
                 Ortiz Alejandre
               </span>
+
+              {/* Línea 2 */}
               <span
-                className="block font-serif italic"
+                className="block font-serif text-4xl md:text-5xl lg:text-6xl font-normal italic leading-[1.1] tracking-[-0.02em] text-[#31332C] mt-3"
                 style={{
-                  fontSize: "clamp(46px, 7vw, 92px)",
-                  color: "#505E80",
-                  letterSpacing: "-0.02em",
-                  opacity: show(2) ? 1 : 0,
-                  transform: show(2) ? "translateY(0)" : "translateY(28px)",
-                  transition: "opacity 0.9s 0.15s ease, transform 0.9s 0.15s ease",
+                  opacity: show(3) ? 1 : 0,
+                  transform: show(3) ? "translateY(0)" : "translateY(24px)",
+                  transition: "opacity 0.9s ease, transform 0.9s ease",
                 }}
               >
-                Derecho Corporativo.
+                Arquitectura legal
+                <br />
+                para negocios que crecen.
               </span>
             </h1>
           </div>
 
-          {/* Right: Tagline (1/3) */}
-          <div className="md:col-span-1 md:pb-3">
-            <p
-              className="font-serif italic"
-              style={{
-                fontSize: "clamp(14px, 1.15vw, 17px)",
-                color: "#5C5E57",
-                lineHeight: 1.75,
-                letterSpacing: "0.01em",
-                opacity: show(3) ? 1 : 0,
-                transform: show(3) ? "translateY(0)" : "translateY(12px)",
-                transition: "opacity 0.8s ease, transform 0.8s ease",
-              }}
-            >
-              Soluciones legales de alta precisión para el ecosistema empresarial de las PyMEs.
-            </p>
-          </div>
-        </div>
-
-        {/* CTA + Signature Divider */}
-        <div
-          style={{
-            opacity: show(4) ? 1 : 0,
-            transform: show(4) ? "translateY(0)" : "translateY(8px)",
-            transition: "opacity 0.8s ease, transform 0.8s ease",
-          }}
-        >
-          <a
-            href="#contacto"
-            onClick={handleContactClick}
-            className="font-sans inline-block mb-10"
+          {/* Bloque asimétrico inferior */}
+          <div
+            className="flex flex-col md:flex-row gap-10 md:gap-20 items-start md:items-end mt-16 md:mt-20"
             style={{
-              fontSize: 11,
-              fontWeight: 500,
-              letterSpacing: "0.16em",
-              textTransform: "uppercase",
-              color: "#505E80",
-              textDecoration: "none",
-              transition: "color 0.3s ease",
+              opacity: show(4) ? 1 : 0,
+              transform: show(4) ? "translateY(0)" : "translateY(12px)",
+              transition: "opacity 0.8s ease, transform 0.8s ease",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#445273")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#505E80")}
           >
-            COORDINAR CONSULTA →
-          </a>
+            {/* Columna izquierda */}
+            <div className="flex-1 max-w-md">
+              <div className="w-[120px] h-px bg-[#505E80] mb-6" />
+              <p className="font-serif italic text-base md:text-lg leading-relaxed text-[#5C5E57]">
+                Soluciones legales de alta precisión para el ecosistema empresarial de las PyMEs argentinas. Ordenamos la estructura del negocio para que pueda sostener su crecimiento.
+              </p>
+            </div>
 
-          {/* Signature Divider */}
-          <div style={{ width: 120, height: 1, background: "#505E80" }} />
+            {/* Columna derecha */}
+            <div className="flex-1 md:text-right">
+              <a
+                href="#contacto"
+                onClick={handleContactClick}
+                className="text-xs tracking-[2px] uppercase text-[#31332C] border-b border-[#31332C] pb-1 inline-block hover:text-[#505E80] hover:border-[#505E80] transition-colors"
+              >
+                Coordinar consulta →
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
+
+      {/* ── BLOQUE 2: Tagline ── */}
+      <div
+        className="py-14 md:py-20 px-6"
+        style={{
+          background: "#F5F4ED",
+          opacity: show(5) ? 1 : 0,
+          transform: show(5) ? "translateY(0)" : "translateY(12px)",
+          transition: "opacity 0.9s ease, transform 0.9s ease",
+        }}
+      >
+        <p className="font-serif text-xl md:text-2xl lg:text-[26px] leading-[1.6] text-[#31332C] font-normal text-center">
+          <em>El derecho ordena.</em>
+          <br />
+          <em>La gestión organiza.</em>
+          <br />
+          <em>La tecnología potencia.</em>
+        </p>
+      </div>
+
     </section>
   );
 }
