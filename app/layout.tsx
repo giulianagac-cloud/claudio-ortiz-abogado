@@ -1,22 +1,23 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Newsreader, Public_Sans } from "next/font/google";
 import "./globals.css";
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const publicSans = Public_Sans({
+  variable: "--font-public-sans",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Ortiz Alejandre — Derecho Corporativo",
+  title: "Ortiz Alejandre — Derecho Corporativo para PyMEs",
   description:
-    "Asesoramiento jurídico estratégico para empresas y PyMEs. Derecho societario, contratos, acuerdos de accionistas, marcas y patentes.",
+    "Asesoramiento jurídico estratégico para empresas y PyMEs. Derecho corporativo, gestión y transformación digital.",
 };
 
 export default function RootLayout({
@@ -26,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${cormorant.variable} ${inter.variable} antialiased`}>
+      <body className={`${newsreader.variable} ${publicSans.variable} antialiased`}>
         {children}
       </body>
     </html>

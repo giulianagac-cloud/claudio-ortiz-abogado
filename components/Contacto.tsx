@@ -4,6 +4,30 @@ import { useState, useEffect, useRef } from "react";
 
 type FormState = "idle" | "sending" | "sent" | "error";
 
+const inputStyle: React.CSSProperties = {
+  border: "none",
+  borderBottom: "1px solid #B1B3A9",
+  borderRadius: 0,
+  padding: "10px 0",
+  fontSize: 15,
+  color: "#31332C",
+  outline: "none",
+  width: "100%",
+  background: "transparent",
+  fontFamily: "inherit",
+  transition: "border-color 0.3s ease",
+};
+
+const labelStyle: React.CSSProperties = {
+  fontSize: 9,
+  letterSpacing: "0.15em",
+  color: "#5C5E57",
+  display: "block",
+  marginBottom: 8,
+  textTransform: "uppercase",
+  fontFamily: "inherit",
+};
+
 export default function Contacto() {
   const [formState, setFormState] = useState<FormState>("idle");
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -14,16 +38,13 @@ export default function Contacto() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.querySelectorAll(".fade-in").forEach((el, i) => {
-              setTimeout(() => {
-                el.classList.add("visible");
-              }, i * 100);
+              setTimeout(() => el.classList.add("visible"), i * 100);
             });
           }
         });
       },
       { threshold: 0.1 }
     );
-
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
@@ -31,17 +52,14 @@ export default function Contacto() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormState("sending");
-
     const form = e.currentTarget;
     const data = new FormData(form);
-
     try {
       const res = await fetch(form.action, {
         method: "POST",
         body: data,
         headers: { Accept: "application/json" },
       });
-
       if (res.ok) {
         setFormState("sent");
         form.reset();
@@ -53,156 +71,173 @@ export default function Contacto() {
     }
   };
 
-  const inputBase =
-    "w-full bg-transparent border-0 border-b border-[#2A3E5E] text-white placeholder-[#667799] py-3 text-base font-light font-sans focus:outline-none focus:border-white transition-colors duration-300";
-
-  const labelBase =
-    "font-sans text-sm uppercase tracking-[1px] text-[#8899AA] block mb-2";
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    e.currentTarget.style.borderBottomColor = "#505E80";
+  };
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    e.currentTarget.style.borderBottomColor = "#B1B3A9";
+  };
 
   return (
-    <section id="contacto" className="bg-[#0F1628] py-16 md:py-28 lg:py-32">
-      <div ref={sectionRef} className="max-w-6xl mx-auto px-6 md:px-8">
-        {/* Encabezado */}
-        <div className="mb-16 md:mb-20 fade-in">
-          <p className="font-sans text-sm text-[#C9A96E] uppercase tracking-[3px] mb-4">
+    <section id="contacto" style={{ background: "#EFEEE6", padding: "128px 0" }}>
+      <div ref={sectionRef} className="max-w-7xl mx-auto px-6 md:px-10">
+
+        {/* Header centrado */}
+        <div className="text-center mb-20 fade-in">
+          <p
+            className="font-sans uppercase mb-5"
+            style={{ fontSize: 10, letterSpacing: "0.18em", color: "#5C5E57" }}
+          >
             CONTACTO
           </p>
-          <h2 className="font-serif text-5xl text-white font-normal mb-5">
-            Hablemos
+          <h2
+            className="font-serif"
+            style={{
+              fontSize: "clamp(28px, 4vw, 52px)",
+              color: "#31332C",
+              letterSpacing: "-0.02em",
+              fontWeight: 400,
+              lineHeight: 1.1,
+            }}
+          >
+            Inicie la conversación legal.
           </h2>
-          <div className="w-14 h-px bg-[#C9A96E]" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-20">
-          {/* Info de contacto */}
-          <div className="fade-in space-y-10">
-            <p className="font-sans text-lg font-light text-[#8899AA] leading-relaxed max-w-sm">
-              ¿Necesita asesoramiento jurídico para su empresa? Complete el formulario
-              o contáctenos directamente.
-            </p>
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-16">
 
-            <div className="space-y-8">
-              <div>
-                <p className="font-sans text-sm uppercase tracking-[2px] text-[#8899AA] mb-1">
-                  EMAIL
-                </p>
-                <p className="font-sans text-base font-light text-white">
-                  consultas@ortizalejandre.com
-                </p>
-              </div>
-              <div>
-                <p className="font-sans text-sm uppercase tracking-[2px] text-[#8899AA] mb-1">
-                  TELÉFONO
-                </p>
-                <p className="font-sans text-base font-light text-white">
-                  +54 11 5640-0469
-                </p>
-              </div>
-              <div>
-                <p className="font-sans text-sm uppercase tracking-[2px] text-[#8899AA] mb-1">
-                  UBICACIÓN
-                </p>
-                <p className="font-sans text-base font-light text-white">
-                  Buenos Aires, Argentina
-                </p>
-              </div>
+          {/* Formulario en card blanca (3/5) */}
+          <div className="md:col-span-3 fade-in">
+            <div style={{ background: "#FFFFFF", padding: "48px 40px" }}>
+              <form
+                action="https://formspree.io/f/FORM_ID"
+                method="POST"
+                onSubmit={handleSubmit}
+                className="space-y-10"
+              >
+                <div>
+                  <label htmlFor="nombre" className="font-sans" style={labelStyle}>
+                    NOMBRE COMPLETO
+                  </label>
+                  <input
+                    id="nombre"
+                    name="nombre"
+                    type="text"
+                    required
+                    className="font-sans"
+                    style={inputStyle}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="font-sans" style={labelStyle}>
+                    CORREO ELECTRÓNICO
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    className="font-sans"
+                    style={inputStyle}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="mensaje" className="font-sans" style={labelStyle}>
+                    MENSAJE
+                  </label>
+                  <textarea
+                    id="mensaje"
+                    name="mensaje"
+                    required
+                    rows={4}
+                    className="font-sans resize-none"
+                    style={inputStyle}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                  />
+                </div>
+
+                <div className="text-center pt-2">
+                  <button
+                    type="submit"
+                    disabled={formState === "sending" || formState === "sent"}
+                    className="font-sans border-none"
+                    style={{
+                      fontSize: 10,
+                      letterSpacing: "0.14em",
+                      textTransform: "uppercase",
+                      background: "#505E80",
+                      color: "#F7F7FF",
+                      borderRadius: 0,
+                      padding: "14px 44px",
+                      transition: "background 0.3s ease",
+                      opacity: formState === "sending" || formState === "sent" ? 0.6 : 1,
+                      cursor:
+                        formState === "sending" || formState === "sent"
+                          ? "not-allowed"
+                          : "pointer",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (formState === "idle")
+                        e.currentTarget.style.background = "#445273";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = "#505E80";
+                    }}
+                  >
+                    {formState === "sending" ? "ENVIANDO..." : "ENVIAR SOLICITUD"}
+                  </button>
+
+                  {formState === "sent" && (
+                    <p
+                      className="mt-4 font-sans text-sm"
+                      style={{ color: "#5C5E57" }}
+                    >
+                      Mensaje enviado. Nos pondremos en contacto a la brevedad.
+                    </p>
+                  )}
+                  {formState === "error" && (
+                    <p
+                      className="mt-4 font-sans text-sm"
+                      style={{ color: "#5C5E57" }}
+                    >
+                      Hubo un error. Escribanos a consultas@ortizalejandre.com
+                    </p>
+                  )}
+                </div>
+              </form>
             </div>
           </div>
 
-          {/* Formulario */}
-          <div className="fade-in">
-            <form
-              action="https://formspree.io/f/FORM_ID"
-              method="POST"
-              onSubmit={handleSubmit}
-              className="space-y-8"
-            >
-              <div>
-                <label htmlFor="nombre" className={labelBase}>
-                  Nombre completo
-                </label>
-                <input
-                  id="nombre"
-                  name="nombre"
-                  type="text"
-                  required
-                  placeholder="Juan García"
-                  className={inputBase}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="email" className={labelBase}>
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="juan@empresa.com"
-                  className={inputBase}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="empresa" className={labelBase}>
-                  Empresa{" "}
-                  <span className="normal-case text-[#2A3E5E]">(opcional)</span>
-                </label>
-                <input
-                  id="empresa"
-                  name="empresa"
-                  type="text"
-                  placeholder="Mi Empresa S.A."
-                  className={inputBase}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="mensaje" className={labelBase}>
-                  Mensaje
-                </label>
-                <textarea
-                  id="mensaje"
-                  name="mensaje"
-                  required
-                  rows={4}
-                  placeholder="Describa brevemente su consulta..."
-                  className={`${inputBase} resize-none`}
-                />
-              </div>
-
-              {/* Submit */}
-              <div>
-                <button
-                  type="submit"
-                  disabled={formState === "sending" || formState === "sent"}
-                  className="font-sans text-base text-[#C9A96E] uppercase tracking-[2px] border border-[#C9A96E] px-10 py-4 transition-all duration-300 hover:bg-[#C9A96E] hover:text-[#0F1628] disabled:opacity-50 disabled:cursor-not-allowed"
+          {/* Datos de contacto (2/5) */}
+          <div className="md:col-span-2 fade-in flex flex-col justify-center gap-10">
+            {[
+              { label: "EMAIL", value: "consultas@ortizalejandre.com" },
+              { label: "TELÉFONO", value: "+54 11 5640-0469" },
+              { label: "HORARIO", value: "Lunes a Viernes 10–19hs" },
+              { label: "UBICACIÓN", value: "Buenos Aires, Argentina" },
+            ].map(({ label, value }) => (
+              <div key={label}>
+                <p
+                  className="font-sans uppercase mb-2"
+                  style={{ fontSize: 9, letterSpacing: "0.15em", color: "#5C5E57" }}
                 >
-                  {formState === "sending" ? "ENVIANDO..." : "ENVIAR MENSAJE"}
-                </button>
-
-                {formState === "sent" && (
-                  <p className="mt-4 font-sans text-base font-light text-[#8899AA]">
-                    Mensaje enviado correctamente. Nos pondremos en contacto a la brevedad.
-                  </p>
-                )}
-                {formState === "error" && (
-                  <p className="mt-4 font-sans text-base font-light text-[#8899AA]">
-                    Hubo un error. Intente nuevamente o escríbanos a{" "}
-                    <span className="text-white">consultas@ortizalejandre.com</span>.
-                  </p>
-                )}
+                  {label}
+                </p>
+                <p
+                  className="font-sans"
+                  style={{ fontSize: 15, color: "#31332C", fontWeight: 300 }}
+                >
+                  {value}
+                </p>
               </div>
-
-              <p className="mt-6 font-sans text-xs font-light text-[#2A3E5E] leading-relaxed">
-                Los datos ingresados en este formulario son utilizados únicamente para responder su consulta. No se comparten con terceros. Puede solicitar la eliminación de sus datos en cualquier momento escribiendo a{" "}
-                <a href="mailto:consultas@ortizalejandre.com" className="text-[#8899AA] hover:text-white transition-colors duration-300">
-                  consultas@ortizalejandre.com
-                </a>.
-              </p>
-            </form>
+            ))}
           </div>
         </div>
       </div>

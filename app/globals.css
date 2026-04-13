@@ -1,19 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: var(--font-cormorant), Georgia, serif;
-  --font-sans: var(--font-inter), Arial, sans-serif;
+  --font-serif: var(--font-newsreader), Georgia, serif;
+  --font-sans: var(--font-public-sans), Arial, sans-serif;
 }
 
 :root {
-  --color-midnight: #0F1628;
-  --color-deep-navy: #1C2B4A;
-  --color-champagne: #C9A96E;
-  --color-ivory: #F8F6F1;
-  --color-white: #FFFFFF;
-  --color-gray-light: #E8E6E1;
-  --color-gray-text: #8899AA;
-  --color-gray-muted: #667799;
+  --surface: #FBF9F4;
+  --surface-container-low: #F5F4ED;
+  --surface-container: #EFEEE6;
+  --surface-container-lowest: #FFFFFF;
+  --primary: #505E80;
+  --primary-dim: #445273;
+  --on-surface: #31332C;
+  --on-surface-variant: #5C5E57;
+  --outline-variant: #B1B3A9;
+  --on-primary: #F7F7FF;
 }
 
 html {
@@ -21,7 +23,7 @@ html {
 }
 
 body {
-  @apply bg-[#F8F6F1] text-[#0F1628];
+  @apply bg-[#FBF9F4] text-[#31332C];
 }
 
 /* Form input autofill reset */
@@ -31,7 +33,7 @@ input:-webkit-autofill:focus,
 textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,
 textarea:-webkit-autofill:focus {
-  -webkit-text-fill-color: #ffffff;
+  -webkit-text-fill-color: #31332C;
   -webkit-box-shadow: 0 0 0px 1000px transparent inset;
   transition: background-color 5000s ease-in-out 0s;
   background-color: transparent !important;
