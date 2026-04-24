@@ -69,13 +69,13 @@ export default function Hero() {
               fontSize: 10,
               letterSpacing: "0.18em",
               color: "#5C5E57",
-              marginBottom: 32,
+              marginBottom: 20,
               opacity: show(2) ? 1 : 0,
               transform: show(2) ? "translateY(0)" : "translateY(10px)",
               transition: "opacity 0.8s ease, transform 0.8s ease",
             }}
           >
-            Derecho Corporativo · PyMEs · Gestión &amp; Tecnología
+            Ab. Claudio Ortiz Alejandre
           </p>
 
           <h1
@@ -92,7 +92,7 @@ export default function Hero() {
               transition: "opacity 0.9s ease, transform 0.9s ease",
             }}
           >
-            Estructura legal que aguanta el crecimiento.
+            Estudio Ortiz Alejandre
           </h1>
 
           <p
@@ -107,7 +107,7 @@ export default function Hero() {
               transition: "opacity 0.8s ease, transform 0.8s ease",
             }}
           >
-            Para emprendedores que no quieren sorpresas desagradables.
+            Derecho corporativo, gestión y tecnología<br />al servicio de las empresas argentinas.
           </p>
 
           <div
