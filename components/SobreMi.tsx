@@ -24,122 +24,237 @@ export default function SobreMi() {
   }, []);
 
   return (
-    <section id="sobre-mi" style={{ background: "#F8F6F1", padding: "96px 0" }}>
+    <section id="sobre-nosotros" style={{ background: "#F8F6F1", padding: "96px 0" }}>
       <div ref={sectionRef} className="max-w-7xl mx-auto px-6 md:px-10">
-        <div
-          className="grid grid-cols-1 md:grid-cols-2"
-          style={{ gap: "64px", alignItems: "center" }}
-        >
 
-          {/* Columna izquierda — foto */}
-          <div className="fade-in">
-            <div style={{ position: "relative", width: "100%", aspectRatio: "3/4", overflow: "hidden", maxWidth: 480 }}>
-              <Image
-                src="/claudio.jpeg"
-                alt="Claudio Ortiz Alejandre"
-                fill
-                style={{ objectFit: "cover", objectPosition: "center top" }}
-              />
-            </div>
-            <div style={{ marginTop: 20 }}>
-              <p
-                className="font-serif italic"
-                style={{ fontSize: 18, color: "#31332C", marginBottom: 4 }}
-              >
-                Claudio Ortiz Alejandre
-              </p>
-              <p
-                className="font-sans"
-                style={{ fontSize: 12, letterSpacing: "0.1em", color: "#5C5E57", textTransform: "uppercase" }}
-              >
-                Abogado Corporativo · PyMEs
-              </p>
-              <p
-                className="font-sans"
-                style={{ fontSize: 11, letterSpacing: "0.08em", color: "#B1B3A9", marginTop: 6 }}
-              >
-                Abogado (UBA) · Lic. en Administración · CPACF
-              </p>
-            </div>
-          </div>
+        {/* Bloque A — Introducción del estudio */}
+        <div className="fade-in" style={{ maxWidth: "48rem", marginBottom: 80 }}>
+          <p
+            className="font-sans uppercase"
+            style={{ fontSize: 10, letterSpacing: "0.18em", color: "#C9A96E", marginBottom: 16 }}
+          >
+            Quiénes Somos
+          </p>
+          <h2
+            className="font-serif"
+            style={{
+              fontSize: "clamp(28px, 3.5vw, 44px)",
+              fontWeight: 300,
+              color: "#0F1628",
+              letterSpacing: "-0.025em",
+              lineHeight: 1.15,
+              marginBottom: 24,
+            }}
+          >
+            Ortiz Alejandre.
+          </h2>
+          <p
+            className="font-sans"
+            style={{ fontSize: 16, color: "#0F1628", lineHeight: 1.85, fontWeight: 300 }}
+          >
+            Ortiz Alejandre es un espacio especializado en derecho corporativo para PyMEs. Liderado por profesionales con formación en abogacía y administración de empresas, el enfoque de trabajo integra lo legal con la dinámica propia de cada organización. El objetivo no es solo resolver conflictos, sino anticiparlos y ordenar la estructura del negocio para que pueda sostener su crecimiento. Cuando la organización lo requiere, también contamos con especialistas en herramientas de gestión y tecnología, entendiendo que el crecimiento también exige revisar cómo funciona lo que ya está en marcha.
+          </p>
+          <div style={{ width: 48, height: 2, background: "#C9A96E", marginTop: 32 }} />
+        </div>
 
-          {/* Columna derecha — texto */}
-          <div>
-            <div className="fade-in" style={{ marginBottom: 40 }}>
-              <p
-                className="font-sans uppercase"
-                style={{ fontSize: 10, letterSpacing: "0.18em", color: "#C9A96E", marginBottom: 16 }}
-              >
-                Sobre Claudio
-              </p>
-              <h2
-                className="font-serif"
-                style={{
-                  fontSize: "clamp(28px, 3.5vw, 44px)",
-                  fontWeight: 300,
-                  color: "#0F1628",
-                  letterSpacing: "-0.025em",
-                  lineHeight: 1.15,
-                  marginBottom: 8,
-                }}
-              >
-                Un abogado que entiende los negocios.
-              </h2>
-              <div style={{ width: 48, height: 2, background: "#C9A96E", marginTop: 20 }} />
-            </div>
+        {/* Separador A → B */}
+        <div style={{ borderTop: "1px solid rgba(177,179,169,0.3)", paddingTop: 80 }}>
 
-            <div className="fade-in" style={{ display: "flex", flexDirection: "column", gap: 20, marginBottom: 40 }}>
-              <p
-                className="font-sans"
-                style={{ fontSize: 16, color: "#0F1628", lineHeight: 1.85, fontWeight: 300 }}
-              >
-                Claudio es abogado corporativista con más de 10 años de experiencia en estructuras empresariales. Combina formación legal con administración de empresas para entender la dinámica real de los negocios — no solo el marco normativo.
-              </p>
-              <p
-                className="font-sans"
-                style={{ fontSize: 16, color: "#0F1628", lineHeight: 1.85, fontWeight: 300 }}
-              >
-                Su enfoque no es resolver conflictos después: es anticiparlos. Ordena la estructura legal del negocio desde el inicio, para que puedas crecer sin sorpresas de cumplimiento o conflictos societarios que frenen el avance.
-              </p>
+          {/* Bloque B — Sobre Claudio */}
+          <div
+            className="grid grid-cols-1 md:grid-cols-2"
+            style={{ gap: "64px", alignItems: "center", marginBottom: 80 }}
+          >
+            {/* Foto */}
+            <div className="fade-in">
+              <div style={{ position: "relative", width: "100%", aspectRatio: "3/4", overflow: "hidden", maxWidth: 480 }}>
+                <Image
+                  src="/claudio.jpeg"
+                  alt="Claudio Ortiz Alejandre"
+                  fill
+                  style={{ objectFit: "cover", objectPosition: "center top" }}
+                />
+              </div>
+              <div style={{ marginTop: 20 }}>
+                <p
+                  className="font-serif italic"
+                  style={{ fontSize: 18, color: "#31332C", marginBottom: 4 }}
+                >
+                  Claudio Ortiz Alejandre
+                </p>
+                <p
+                  className="font-sans"
+                  style={{ fontSize: 12, letterSpacing: "0.1em", color: "#5C5E57", textTransform: "uppercase" }}
+                >
+                  Abogado Corporativo · PyMEs
+                </p>
+                <p
+                  className="font-sans"
+                  style={{ fontSize: 11, letterSpacing: "0.08em", color: "#B1B3A9", marginTop: 6 }}
+                >
+                  Abogado (UBA) · Lic. en Administración · CPACF
+                </p>
+              </div>
             </div>
 
-            <div className="fade-in" style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-              {[
-                { titulo: "Abogado accesible", desc: "Comunicación clara, sin jerga innecesaria." },
-                { titulo: "Tech-native", desc: "Automatización y herramientas digitales integradas al trabajo legal." },
-                { titulo: "Mentalidad empresaria", desc: "Entiende PyMEs desde adentro, no solo desde la norma." },
-              ].map((item) => (
-                <div key={item.titulo} className="flex items-start gap-3">
-                  <div
-                    style={{
-                      width: 20,
-                      height: 20,
-                      borderRadius: 2,
-                      background: "rgba(28,28,26,0.06)",
-                      border: "1px solid rgba(28,28,26,0.18)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                      marginTop: 2,
-                    }}
-                  >
-                    <span style={{ color: "#1C1C1A", fontSize: 10, fontWeight: 700 }}>✓</span>
+            {/* Texto */}
+            <div>
+              <div className="fade-in" style={{ marginBottom: 40 }}>
+                <p
+                  className="font-sans uppercase"
+                  style={{ fontSize: 10, letterSpacing: "0.18em", color: "#C9A96E", marginBottom: 16 }}
+                >
+                  Sobre Claudio
+                </p>
+                <h2
+                  className="font-serif"
+                  style={{
+                    fontSize: "clamp(28px, 3.5vw, 44px)",
+                    fontWeight: 300,
+                    color: "#0F1628",
+                    letterSpacing: "-0.025em",
+                    lineHeight: 1.15,
+                    marginBottom: 8,
+                  }}
+                >
+                  Un abogado que entiende los negocios.
+                </h2>
+                <div style={{ width: 48, height: 2, background: "#C9A96E", marginTop: 20 }} />
+              </div>
+
+              <div className="fade-in" style={{ display: "flex", flexDirection: "column", gap: 20, marginBottom: 40 }}>
+                <p
+                  className="font-sans"
+                  style={{ fontSize: 16, color: "#0F1628", lineHeight: 1.85, fontWeight: 300 }}
+                >
+                  Claudio es abogado corporativista con más de 10 años de experiencia en estructuras empresariales. Combina formación legal con administración de empresas para entender la dinámica real de los negocios — no solo el marco normativo.
+                </p>
+                <p
+                  className="font-sans"
+                  style={{ fontSize: 16, color: "#0F1628", lineHeight: 1.85, fontWeight: 300 }}
+                >
+                  Su enfoque no es resolver conflictos después: es anticiparlos. Ordena la estructura legal del negocio desde el inicio, para que puedas crecer sin sorpresas de cumplimiento o conflictos societarios que frenen el avance.
+                </p>
+              </div>
+
+              <div className="fade-in" style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                {[
+                  { titulo: "Abogado accesible", desc: "Comunicación clara, sin jerga innecesaria." },
+                  { titulo: "Tech-native", desc: "Automatización y herramientas digitales integradas al trabajo legal." },
+                  { titulo: "Mentalidad empresaria", desc: "Entiende PyMEs desde adentro, no solo desde la norma." },
+                ].map((item) => (
+                  <div key={item.titulo} className="flex items-start gap-3">
+                    <div
+                      style={{
+                        width: 20,
+                        height: 20,
+                        borderRadius: 2,
+                        background: "rgba(28,28,26,0.06)",
+                        border: "1px solid rgba(28,28,26,0.18)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                        marginTop: 2,
+                      }}
+                    >
+                      <span style={{ color: "#1C1C1A", fontSize: 10, fontWeight: 700 }}>✓</span>
+                    </div>
+                    <div>
+                      <span className="font-sans" style={{ fontSize: 14, color: "#0F1628", fontWeight: 500 }}>
+                        {item.titulo}
+                      </span>
+                      <span className="font-sans" style={{ fontSize: 14, color: "#5C5E57", fontWeight: 300 }}>
+                        {" — "}{item.desc}
+                      </span>
+                    </div>
                   </div>
-                  <div>
-                    <span className="font-sans" style={{ fontSize: 14, color: "#0F1628", fontWeight: 500 }}>
-                      {item.titulo}
-                    </span>
-                    <span className="font-sans" style={{ fontSize: 14, color: "#5C5E57", fontWeight: 300 }}>
-                      {" — "}{item.desc}
-                    </span>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
 
         </div>
+
+        {/* Separador B → C */}
+        <div style={{ borderTop: "1px solid rgba(177,179,169,0.3)", paddingTop: 80 }}>
+
+          {/* Bloque C — Nexora Intelligence */}
+          <div
+            className="grid grid-cols-1 md:grid-cols-2"
+            style={{ gap: "64px", alignItems: "center" }}
+          >
+            {/* Texto (izquierda) */}
+            <div>
+              <div className="fade-in" style={{ marginBottom: 40 }}>
+                <p
+                  className="font-sans uppercase"
+                  style={{ fontSize: 10, letterSpacing: "0.18em", color: "#C9A96E", marginBottom: 16 }}
+                >
+                  Tecnología &amp; Gestión
+                </p>
+                <h3
+                  className="font-serif"
+                  style={{
+                    fontSize: "clamp(28px, 3.5vw, 44px)",
+                    fontWeight: 300,
+                    color: "#0F1628",
+                    letterSpacing: "-0.025em",
+                    lineHeight: 1.15,
+                    marginBottom: 8,
+                  }}
+                >
+                  Nexora Intelligence.
+                </h3>
+                <div style={{ width: 48, height: 2, background: "#C9A96E", marginTop: 20 }} />
+              </div>
+
+              <div className="fade-in" style={{ marginBottom: 32 }}>
+                <p
+                  className="font-sans"
+                  style={{ fontSize: 16, color: "#0F1628", lineHeight: 1.85, fontWeight: 300 }}
+                >
+                  Nexora Intelligence es el brazo tecnológico de Ortiz Alejandre. Especializada en automatización, inteligencia artificial y transformación digital para PyMEs, Nexora trabaja junto al equipo legal para ofrecer soluciones integrales que van más allá del asesoramiento jurídico. Porque crecer hoy exige tanto una estructura legal sólida como procesos y herramientas que acompañen ese crecimiento.
+                </p>
+              </div>
+
+              <div className="fade-in">
+                <a
+                  href="https://nexoraintelligence.co"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-sans"
+                  style={{
+                    fontSize: 11,
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                    color: "#C9A96E",
+                    textDecoration: "none",
+                    transition: "opacity 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
+                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+                >
+                  nexoraintelligence.co →
+                </a>
+              </div>
+            </div>
+
+            {/* Foto (derecha) */}
+            <div className="fade-in">
+              <div style={{ position: "relative", width: "100%", aspectRatio: "3/4", overflow: "hidden", maxWidth: 480 }}>
+                <Image
+                  src="/articulos/nexora.png"
+                  alt="Nexora Intelligence"
+                  fill
+                  style={{ objectFit: "cover", objectPosition: "center center" }}
+                />
+              </div>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </section>
   );

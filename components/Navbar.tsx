@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const scrollLinks = [
   { label: "EXPERTISE", href: "servicios" },
-  { label: "SOBRE MÍ", href: "sobre-mi" },
+  { label: "SOBRE NOSOTROS", href: "sobre-nosotros" },
 ];
 
 const contactLink = { label: "CONTACTO", href: "contacto" };
