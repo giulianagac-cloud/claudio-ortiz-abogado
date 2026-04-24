@@ -186,7 +186,7 @@ export default function Contacto() {
             Iniciemos la conversación.
           </h2>
           <p className="font-serif italic" style={{ fontSize: 17, color: "#7A7A72" }}>
-            Cuéntanos qué necesitas. La consulta inicial es gratuita.
+            Contanos qué necesitás. La consulta inicial es gratuita.
           </p>
         </div>
 
