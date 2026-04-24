@@ -35,7 +35,7 @@ export default function SobreMi() {
           <div className="fade-in">
             <div style={{ position: "relative", width: "100%", aspectRatio: "3/4", overflow: "hidden", maxWidth: 480 }}>
               <Image
-                src="/equipo.jpg"
+                src="/claudio.jpeg"
                 alt="Claudio Ortiz Alejandre — Abogado Corporativo"
                 fill
                 style={{ objectFit: "cover", objectPosition: "center top" }}
