@@ -81,7 +81,7 @@ export default function Navbar() {
         >
           <span
             className="font-serif italic"
-            style={{ fontSize: 22, color: "#31332C", letterSpacing: "-0.01em" }}
+            style={{ fontSize: 28, color: "#31332C", letterSpacing: "-0.01em" }}
           >
             Ortiz Alejandre
           </span>
