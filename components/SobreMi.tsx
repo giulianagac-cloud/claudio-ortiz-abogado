@@ -244,7 +244,7 @@ export default function SobreMi() {
             <div className="fade-in">
               <div style={{ position: "relative", width: "100%", aspectRatio: "3/4", overflow: "hidden", maxWidth: 480 }}>
                 <Image
-                  src="/articulos/nexora.png"
+                  src="/nexora.png"
                   alt="Nexora Intelligence"
                   fill
                   style={{ objectFit: "cover", objectPosition: "center center" }}
