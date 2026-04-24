@@ -35,10 +35,10 @@ export default function SobreMi() {
           <div className="fade-in">
             <div style={{ position: "relative", width: "100%", aspectRatio: "3/4", overflow: "hidden", maxWidth: 480 }}>
               <Image
-                src="/oficina.png"
-                alt="Estudio Ortiz Alejandre — Oficina"
+                src="/claudio.jpeg"
+                alt="Claudio Ortiz Alejandre"
                 fill
-                style={{ objectFit: "cover", objectPosition: "center center" }}
+                style={{ objectFit: "cover", objectPosition: "center top" }}
               />
             </div>
             <div style={{ marginTop: 20 }}>

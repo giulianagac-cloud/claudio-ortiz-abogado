@@ -43,8 +43,8 @@ export default function Hero() {
           }}
         >
           <Image
-            src="/claudio.jpeg"
-            alt="Claudio Ortiz Alejandre"
+            src="/equipo.png"
+            alt="Equipo de Ortiz Alejandre"
             fill
             style={{ objectFit: "cover", objectPosition: "center top" }}
             priority
