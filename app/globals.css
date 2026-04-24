@@ -22,10 +22,12 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   @apply bg-[#FBF9F4] text-[#31332C];
+  overflow-x: hidden;
 }
 
 /* Form input autofill reset */
@@ -63,6 +65,45 @@ textarea:-webkit-autofill:focus {
 
 .articulo-back-link:hover {
   color: #505E80 !important;
+}
+
+.articulo-section-link:hover {
+  color: #31332C !important;
+  border-color: #31332C !important;
+}
+
+.hero-grid {
+  grid-template-columns: 1fr;
+}
+
+.hero-photo-gradient {
+  background: linear-gradient(to bottom, transparent 70%, #FBF9F4 100%);
+}
+
+.hero-line-break {
+  display: none;
+}
+
+.hero-copy-limited {
+  max-width: min(100%, 342px);
+}
+
+@media (min-width: 768px) {
+  .hero-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-photo-gradient {
+    background: linear-gradient(to right, transparent 70%, #FBF9F4 100%);
+  }
+
+  .hero-line-break {
+    display: inline;
+  }
+
+  .hero-copy-limited {
+    max-width: 540px;
+  }
 }
 
 /* MDX article body */

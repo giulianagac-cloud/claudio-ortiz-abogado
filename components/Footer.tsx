@@ -12,7 +12,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 md:px-10">
 
         {/* Grid 4 columnas */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-8" style={{ marginBottom: 48 }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-8" style={{ marginBottom: 48 }}>
 
           {/* Col 1: Navegación */}
           <div>
@@ -26,6 +26,7 @@ export default function Footer() {
               {[
                 { label: "Expertise", href: "servicios" },
                 { label: "Sobre Claudio", href: "sobre-mi" },
+                { label: "Artículos", href: "articulos" },
                 { label: "Contacto", href: "contacto" },
               ].map((link) => (
                 <button
@@ -70,7 +71,13 @@ export default function Footer() {
               <a
                 href="mailto:consultas@ortizalejandre.com"
                 className="font-sans"
-                style={{ fontSize: 13, color: "#7A7A72", textDecoration: "none", transition: "color 0.2s ease" }}
+                style={{
+                  fontSize: 13,
+                  color: "#7A7A72",
+                  textDecoration: "none",
+                  transition: "color 0.2s ease",
+                  overflowWrap: "anywhere",
+                }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#F5F4ED")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "#7A7A72")}
               >

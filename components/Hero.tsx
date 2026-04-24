@@ -22,21 +22,22 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" style={{ background: "#FBF9F4", paddingTop: 68, minHeight: "100vh" }}>
+    <section id="hero" style={{ background: "#FBF9F4", paddingTop: 68, minHeight: "100vh", overflow: "hidden" }}>
       <div
-        className="max-w-7xl mx-auto"
+        className="max-w-7xl mx-auto hero-grid"
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 1fr",
           minHeight: "calc(100vh - 68px)",
         }}
       >
         {/* Columna izquierda — foto */}
         <div
+          className="hero-photo"
           style={{
             position: "relative",
             overflow: "hidden",
-            minHeight: 480,
+            minWidth: 0,
+            minHeight: "clamp(360px, 55vw, 480px)",
             opacity: show(1) ? 1 : 0,
             transition: "opacity 1s ease",
           }}
@@ -49,10 +50,10 @@ export default function Hero() {
             priority
           />
           <div
+            className="hero-photo-gradient"
             style={{
               position: "absolute",
               inset: 0,
-              background: "linear-gradient(to right, transparent 70%, #FBF9F4 100%)",
               pointerEvents: "none",
             }}
           />
@@ -60,11 +61,17 @@ export default function Hero() {
 
         {/* Columna derecha — texto */}
         <div
-          className="flex flex-col justify-center px-10 md:px-16 py-20"
-          style={{ background: "#FBF9F4" }}
+          className="hero-copy flex flex-col justify-center"
+          style={{
+            background: "#FBF9F4",
+            boxSizing: "border-box",
+            maxWidth: "100vw",
+            minWidth: 0,
+            padding: "clamp(48px, 8vw, 80px) clamp(24px, 5vw, 64px) clamp(72px, 8vw, 80px)",
+          }}
         >
           <p
-            className="font-sans uppercase"
+            className="font-sans uppercase hero-copy-limited"
             style={{
               fontSize: 10,
               letterSpacing: "0.18em",
@@ -79,14 +86,16 @@ export default function Hero() {
           </p>
 
           <h1
-            className="font-serif"
+            className="font-serif hero-copy-limited"
             style={{
-              fontSize: "clamp(32px, 4vw, 52px)",
+              fontSize: "clamp(28px, 7vw, 52px)",
               fontWeight: 400,
               lineHeight: 1.1,
               letterSpacing: "-0.025em",
               color: "#31332C",
               marginBottom: 20,
+              maxWidth: "100%",
+              overflowWrap: "break-word",
               opacity: show(2) ? 1 : 0,
               transform: show(2) ? "translateY(0)" : "translateY(16px)",
               transition: "opacity 0.9s ease, transform 0.9s ease",
@@ -96,21 +105,24 @@ export default function Hero() {
           </h1>
 
           <p
-            className="font-serif italic"
+            className="font-serif italic hero-copy-limited"
             style={{
               fontSize: "clamp(17px, 2vw, 21px)",
               color: "#5C5E57",
               lineHeight: 1.6,
               marginBottom: 40,
+              maxWidth: "100%",
+              overflowWrap: "break-word",
               opacity: show(3) ? 1 : 0,
               transform: show(3) ? "translateY(0)" : "translateY(12px)",
               transition: "opacity 0.8s ease, transform 0.8s ease",
             }}
           >
-            Derecho corporativo, gestión y tecnología<br />al servicio de las empresas argentinas.
+            Derecho corporativo, gestión y tecnología <span className="hero-line-break"><br /></span>al servicio de las empresas argentinas.
           </p>
 
           <div
+            className="hero-copy-limited"
             style={{
               display: "flex",
               flexDirection: "column",
@@ -136,6 +148,7 @@ export default function Hero() {
           </div>
 
           <div
+            className="hero-copy-limited"
             style={{
               opacity: show(4) ? 1 : 0,
               transform: show(4) ? "translateY(0)" : "translateY(8px)",
