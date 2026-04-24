@@ -54,6 +54,12 @@ export default function SobreMi() {
               >
                 Abogado Corporativo · PyMEs
               </p>
+              <p
+                className="font-sans"
+                style={{ fontSize: 11, letterSpacing: "0.08em", color: "#B1B3A9", marginTop: 6 }}
+              >
+                Abogado (UBA) · Lic. en Administración · CPACF
+              </p>
             </div>
           </div>
 

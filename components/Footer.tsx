@@ -50,17 +50,12 @@ export default function Footer() {
             >
               Legal
             </p>
-            <nav className="flex flex-col gap-3">
-              {["Privacy Policy", "Terms of Service", "Ley 25.326"].map((item) => (
-                <span
-                  key={item}
-                  className="font-sans"
-                  style={{ fontSize: 13, color: "#5C5E57", cursor: "default" }}
-                >
-                  {item}
-                </span>
-              ))}
-            </nav>
+            <p
+              className="font-sans"
+              style={{ fontSize: 12, color: "#5C5E57", lineHeight: 1.7, fontWeight: 300 }}
+            >
+              El tratamiento de sus datos personales se rige por la Ley 25.326 de Protección de Datos Personales.
+            </p>
           </div>
 
           {/* Col 3: Contacto */}

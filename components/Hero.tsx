@@ -42,7 +42,7 @@ export default function Hero() {
           }}
         >
           <Image
-            src="/equipo.jpg"
+            src="/claudio.jpeg"
             alt="Claudio Ortiz Alejandre"
             fill
             style={{ objectFit: "cover", objectPosition: "center top" }}
@@ -165,20 +165,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Tagline inferior */}
-      <div
-        className="py-12 px-6 text-center"
-        style={{
-          background: "#F5F4ED",
-          borderTop: "1px solid rgba(177,179,169,0.3)",
-          opacity: show(4) ? 1 : 0,
-          transition: "opacity 1s ease 0.3s",
-        }}
-      >
-        <p className="font-serif italic" style={{ fontSize: "clamp(16px, 2vw, 22px)", color: "#31332C", lineHeight: 1.8 }}>
-          El derecho ordena.&nbsp;&nbsp;La gestión organiza.&nbsp;&nbsp;La tecnología potencia.
-        </p>
-      </div>
     </section>
   );
 }

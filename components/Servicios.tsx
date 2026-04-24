@@ -21,6 +21,24 @@ const servicios = [
     descripcion:
       "Evitamos conflictos entre socios. Pactamos reglas claras para que el crecimiento no rompa la sociedad: tag-along, drag-along, resolución de conflictos y protocolo de salida.",
   },
+  {
+    numero: "04",
+    titulo: "Marcas y Patentes",
+    descripcion:
+      "Registro y protección de propiedad intelectual ante el INPI. Estrategia de marcas, patentes y defensa ante infracciones.",
+  },
+  {
+    numero: "05",
+    titulo: "Gestión y Procesos",
+    descripcion:
+      "Diagnóstico organizacional y optimización de procesos internos. Profesionalización de la estructura operativa de la PyME.",
+  },
+  {
+    numero: "06",
+    titulo: "Tecnología IT",
+    descripcion:
+      "Digitalización, automatización y herramientas de gestión. Acompañamiento en la transformación tecnológica del negocio.",
+  },
 ];
 
 export default function Servicios() {
@@ -68,11 +86,14 @@ export default function Servicios() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px" style={{ background: "rgba(177,179,169,0.3)", border: "1px solid rgba(177,179,169,0.3)" }}>
+        <div
+          className="grid grid-cols-1 md:grid-cols-3 gap-px"
+          style={{ background: "rgba(177,179,169,0.3)", border: "1px solid rgba(177,179,169,0.3)" }}
+        >
           {servicios.map((s) => (
             <div
               key={s.numero}
-              className="fade-in group"
+              className="fade-in"
               style={{
                 background: "#F5F4ED",
                 padding: "48px 40px",
