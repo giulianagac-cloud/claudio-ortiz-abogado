@@ -70,7 +70,7 @@ export default function SobreMi() {
               <div style={{ position: "relative", width: "100%", aspectRatio: "3/4", overflow: "hidden", maxWidth: 480 }}>
                 <Image
                   src="/claudio.jpeg"
-                  alt="Claudio Ortiz Alejandre"
+                  alt="Claudio Enrique Ortiz"
                   fill
                   style={{ objectFit: "cover", objectPosition: "center top" }}
                 />
@@ -80,7 +80,7 @@ export default function SobreMi() {
                   className="font-serif italic"
                   style={{ fontSize: 18, color: "#31332C", marginBottom: 4 }}
                 >
-                  Claudio Ortiz Alejandre
+                  Claudio Enrique Ortiz
                 </p>
                 <p
                   className="font-sans"

@@ -82,7 +82,7 @@ export default function Hero() {
               transition: "opacity 0.8s ease, transform 0.8s ease",
             }}
           >
-            Ab. Claudio Ortiz Alejandre
+            Ab. Claudio Ortiz — Nexora Intelligence
           </p>
 
           <h1
