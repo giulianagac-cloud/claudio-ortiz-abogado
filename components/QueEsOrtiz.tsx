@@ -1,20 +1,24 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 
 const diferenciales = [
   {
-    num: "01",
+    img: "/estructura-legal.png",
+    alt: "Estructura legal que escala",
     titulo: "Estructura legal que escala",
     desc: "Armamos la base jurídica para que tu negocio crezca sin que la estructura se rompa. Desde la constitución hasta la gobernanza societaria.",
   },
   {
-    num: "02",
+    img: "/sin-sorpresas.png",
+    alt: "Sin sorpresas",
     titulo: "Sin sorpresas",
     desc: "Comunicación clara, sin jerga innecesaria. Anticipamos los problemas antes de que ocurran para que vos te concentres en crecer.",
   },
   {
-    num: "03",
+    img: "/tech-first.png",
+    alt: "Tech-first",
     titulo: "Tech-first",
     desc: "Integramos digitalización y automatización al trabajo legal. Procesos más ágiles, documentación ordenada, gestión moderna.",
   },
@@ -64,33 +68,51 @@ export default function QueEsOrtiz() {
           >
             ¿Por qué elegir Ortiz Alejandre?
           </h2>
+          <p
+            className="font-sans"
+            style={{ fontSize: 15, color: "#5C5E57", marginTop: 16, fontWeight: 300 }}
+          >
+            Tres diferenciadores que te hacen crecer sin sorpresas.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px" style={{ background: "rgba(177,179,169,0.2)", border: "1px solid rgba(177,179,169,0.2)" }}>
+        <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: 24 }}>
           {diferenciales.map((d) => (
             <div
-              key={d.num}
+              key={d.titulo}
               className="fade-in"
-              style={{ background: "#FBF9F4", padding: "40px 36px" }}
+              style={{
+                background: "#FFFFFF",
+                borderRadius: 4,
+                overflow: "hidden",
+                border: "1px solid rgba(177,179,169,0.3)",
+                transition: "box-shadow 0.3s ease",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.boxShadow = "0 8px 32px rgba(80,94,128,0.12)")}
+              onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "none")}
             >
-              <span
-                className="font-serif block"
-                style={{ fontSize: 36, color: "#505E80", opacity: 0.3, lineHeight: 1, marginBottom: 20, fontWeight: 400 }}
-              >
-                {d.num}
-              </span>
-              <h3
-                className="font-serif italic"
-                style={{ fontSize: 20, color: "#31332C", fontWeight: 400, marginBottom: 14, lineHeight: 1.25 }}
-              >
-                {d.titulo}
-              </h3>
-              <p
-                className="font-sans"
-                style={{ fontSize: 14, color: "#5C5E57", lineHeight: 1.85, fontWeight: 300 }}
-              >
-                {d.desc}
-              </p>
+              <div style={{ position: "relative", width: "100%", aspectRatio: "16/9" }}>
+                <Image
+                  src={d.img}
+                  alt={d.alt}
+                  fill
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+              <div style={{ padding: "28px 28px 32px" }}>
+                <h3
+                  className="font-serif italic"
+                  style={{ fontSize: 20, color: "#31332C", fontWeight: 400, marginBottom: 12, lineHeight: 1.25 }}
+                >
+                  {d.titulo}
+                </h3>
+                <p
+                  className="font-sans"
+                  style={{ fontSize: 14, color: "#5C5E57", lineHeight: 1.85, fontWeight: 300 }}
+                >
+                  {d.desc}
+                </p>
+              </div>
             </div>
           ))}
         </div>
