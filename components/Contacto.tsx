@@ -72,21 +72,21 @@ export default function Contacto() {
   };
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    e.currentTarget.style.borderBottomColor = "#505E80";
+    e.currentTarget.style.borderBottomColor = "#C9A96E";
   };
   const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.currentTarget.style.borderBottomColor = "#B1B3A9";
   };
 
   return (
-    <section id="contacto" style={{ background: "#EFEEE6", padding: "96px 0" }}>
+    <section id="contacto" style={{ background: "#1C1C1A", padding: "96px 0" }}>
       <div ref={sectionRef} className="max-w-7xl mx-auto px-6 md:px-10">
 
         {/* Header con contexto */}
         <div className="fade-in" style={{ marginBottom: 64 }}>
           <p
             className="font-sans uppercase"
-            style={{ fontSize: 10, letterSpacing: "0.18em", color: "#5C5E57", marginBottom: 16 }}
+            style={{ fontSize: 10, letterSpacing: "0.18em", color: "#C9A96E", marginBottom: 16 }}
           >
             Contacto
           </p>
@@ -94,8 +94,8 @@ export default function Contacto() {
             className="font-serif"
             style={{
               fontSize: "clamp(28px, 3.5vw, 44px)",
-              fontWeight: 400,
-              color: "#31332C",
+              fontWeight: 300,
+              color: "#F5F4ED",
               letterSpacing: "-0.025em",
               lineHeight: 1.15,
               marginBottom: 12,
@@ -105,7 +105,7 @@ export default function Contacto() {
           </h2>
           <p
             className="font-serif italic"
-            style={{ fontSize: 17, color: "#5C5E57" }}
+            style={{ fontSize: 17, color: "#7A7A72" }}
           >
             Cuéntanos qué necesitas. La consulta inicial es gratuita.
           </p>
@@ -167,16 +167,16 @@ export default function Contacto() {
                       fontSize: 10,
                       letterSpacing: "0.14em",
                       textTransform: "uppercase",
-                      background: "#505E80",
-                      color: "#F7F7FF",
+                      background: "#C9A96E",
+                      color: "#1C1C1A",
                       borderRadius: 0,
                       padding: "14px 44px",
                       transition: "background 0.3s ease",
                       opacity: formState === "sending" || formState === "sent" ? 0.6 : 1,
                       cursor: formState === "sending" || formState === "sent" ? "not-allowed" : "pointer",
                     }}
-                    onMouseEnter={(e) => { if (formState === "idle") e.currentTarget.style.background = "#445273"; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.background = "#505E80"; }}
+                    onMouseEnter={(e) => { if (formState === "idle") e.currentTarget.style.background = "#B8955A"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.background = "#C9A96E"; }}
                   >
                     {formState === "sending" ? "ENVIANDO..." : "SOLICITAR CONSULTA"}
                   </button>
@@ -186,12 +186,12 @@ export default function Contacto() {
                   </p>
 
                   {formState === "sent" && (
-                    <p className="mt-4 font-sans text-sm" style={{ color: "#505E80" }}>
+                    <p className="mt-4 font-sans text-sm" style={{ color: "#C9A96E" }}>
                       Mensaje enviado. Nos pondremos en contacto a la brevedad.
                     </p>
                   )}
                   {formState === "error" && (
-                    <p className="mt-4 font-sans text-sm" style={{ color: "#5C5E57" }}>
+                    <p className="mt-4 font-sans text-sm" style={{ color: "#7A7A72" }}>
                       Hubo un error. Escribinos a consultas@ortizalejandre.com
                     </p>
                   )}
@@ -211,13 +211,13 @@ export default function Contacto() {
               <div key={label}>
                 <p
                   className="font-sans uppercase mb-2"
-                  style={{ fontSize: 9, letterSpacing: "0.15em", color: "#5C5E57" }}
+                  style={{ fontSize: 9, letterSpacing: "0.15em", color: "#7A7A72" }}
                 >
                   {label}
                 </p>
                 <p
                   className="font-sans"
-                  style={{ fontSize: 15, color: "#31332C", fontWeight: 300 }}
+                  style={{ fontSize: 15, color: "#F5F4ED", fontWeight: 300 }}
                 >
                   {value}
                 </p>

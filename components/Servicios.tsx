@@ -76,7 +76,7 @@ export default function Servicios() {
             className="font-serif"
             style={{
               fontSize: "clamp(28px, 3.5vw, 44px)",
-              fontWeight: 400,
+              fontWeight: 300,
               color: "#31332C",
               letterSpacing: "-0.025em",
               lineHeight: 1.15,
@@ -107,8 +107,8 @@ export default function Servicios() {
                 className="font-serif block"
                 style={{
                   fontSize: 40,
-                  color: "#505E80",
-                  opacity: 0.25,
+                  color: "#1C1C1A",
+                  opacity: 0.2,
                   lineHeight: 1,
                   marginBottom: 24,
                   fontWeight: 400,

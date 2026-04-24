@@ -31,7 +31,7 @@ export default function ArticulosPage() {
               className="font-serif"
               style={{
                 fontSize: "clamp(28px, 3.5vw, 44px)",
-                fontWeight: 400,
+                fontWeight: 300,
                 color: "#31332C",
                 letterSpacing: "-0.025em",
                 lineHeight: 1.15,

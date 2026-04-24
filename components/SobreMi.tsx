@@ -76,7 +76,7 @@ export default function SobreMi() {
                 className="font-serif"
                 style={{
                   fontSize: "clamp(28px, 3.5vw, 44px)",
-                  fontWeight: 400,
+                  fontWeight: 300,
                   color: "#0F1628",
                   letterSpacing: "-0.025em",
                   lineHeight: 1.15,
@@ -115,8 +115,8 @@ export default function SobreMi() {
                       width: 20,
                       height: 20,
                       borderRadius: 2,
-                      background: "rgba(80,94,128,0.08)",
-                      border: "1px solid rgba(80,94,128,0.2)",
+                      background: "rgba(28,28,26,0.06)",
+                      border: "1px solid rgba(28,28,26,0.18)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -124,7 +124,7 @@ export default function SobreMi() {
                       marginTop: 2,
                     }}
                   >
-                    <span style={{ color: "#505E80", fontSize: 10, fontWeight: 700 }}>✓</span>
+                    <span style={{ color: "#1C1C1A", fontSize: 10, fontWeight: 700 }}>✓</span>
                   </div>
                   <div>
                     <span className="font-sans" style={{ fontSize: 14, color: "#0F1628", fontWeight: 500 }}>

@@ -127,7 +127,7 @@ export default function Hero() {
               "La tecnología lo automatiza.",
             ].map((line) => (
               <div key={line} className="flex items-center gap-3">
-                <div style={{ width: 4, height: 4, borderRadius: "50%", background: "#505E80", flexShrink: 0 }} />
+                <div style={{ width: 4, height: 4, borderRadius: "50%", background: "#1C1C1A", flexShrink: 0 }} />
                 <span className="font-sans" style={{ fontSize: 14, color: "#5C5E57", letterSpacing: "0.01em" }}>
                   {line}
                 </span>
@@ -150,14 +150,14 @@ export default function Hero() {
                 fontSize: 11,
                 letterSpacing: "0.14em",
                 textTransform: "uppercase",
-                background: "#505E80",
+                background: "#1C1C1A",
                 color: "#F7F7FF",
                 padding: "14px 32px",
                 textDecoration: "none",
                 transition: "background 0.3s ease",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = "#445273")}
-              onMouseLeave={(e) => (e.currentTarget.style.background = "#505E80")}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "#2C2C2A")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "#1C1C1A")}
             >
               Consultar ahora →
             </a>
