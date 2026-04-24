@@ -86,13 +86,7 @@ export default function SobreMi() {
                   className="font-sans"
                   style={{ fontSize: 12, letterSpacing: "0.1em", color: "#5C5E57", textTransform: "uppercase" }}
                 >
-                  Abogado Corporativo · PyMEs
-                </p>
-                <p
-                  className="font-sans"
-                  style={{ fontSize: 11, letterSpacing: "0.08em", color: "#B1B3A9", marginTop: 6 }}
-                >
-                  Abogado (UBA) · Lic. en Administración · CPACF
+                  Abogado Corporativo · Pontificia Universidad Católica Argentina
                 </p>
               </div>
             </div>
@@ -127,13 +121,13 @@ export default function SobreMi() {
                   className="font-sans"
                   style={{ fontSize: 16, color: "#0F1628", lineHeight: 1.85, fontWeight: 300 }}
                 >
-                  Claudio es abogado corporativista con más de 10 años de experiencia en estructuras empresariales. Combina formación legal con administración de empresas para entender la dinámica real de los negocios — no solo el marco normativo.
+                  Claudio es abogado especialista en negociación y resolución de conflictos, con sólidos conocimientos en derecho corporativo y una amplia visión comercial que le permite ir más allá del marco normativo. Su experiencia en negociación y redacción de contratos de abastecimiento en diferentes industrias le da una perspectiva real sobre cómo opera cada negocio.
                 </p>
                 <p
                   className="font-sans"
                   style={{ fontSize: 16, color: "#0F1628", lineHeight: 1.85, fontWeight: 300 }}
                 >
-                  Su enfoque no es resolver conflictos después: es anticiparlos. Ordena la estructura legal del negocio desde el inicio, para que puedas crecer sin sorpresas de cumplimiento o conflictos societarios que frenen el avance.
+                  Su enfoque está orientado a minimizar riesgos sin perder de vista el objetivo principal: el crecimiento de la empresa. La combinación de formación legal y perfil financiero le permite brindar un asesoramiento integral que genera valor concreto para el negocio — no solo cumplimiento normativo.
                 </p>
               </div>
 
