@@ -111,7 +111,7 @@ export default function SobreMi() {
                     marginBottom: 8,
                   }}
                 >
-                  Un abogado que entiende los negocios.
+                  Derecho corporativo con visión de negocio.
                 </h2>
                 <div style={{ width: 48, height: 2, background: "#C9A96E", marginTop: 20 }} />
               </div>
