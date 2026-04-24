@@ -1,18 +1,5 @@
 import type { Metadata } from "next";
-import { Newsreader, Public_Sans } from "next/font/google";
 import "./globals.css";
-
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
-});
-
-const publicSans = Public_Sans({
-  variable: "--font-public-sans",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Ortiz Alejandre — Derecho Corporativo para PyMEs",
@@ -27,9 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${newsreader.variable} ${publicSans.variable} antialiased`}>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

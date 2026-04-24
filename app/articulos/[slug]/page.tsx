@@ -61,7 +61,7 @@ export default async function ArticuloPage({
           {/* Volver */}
           <Link
             href="/articulos"
-            className="font-sans"
+            className="font-sans articulo-back-link"
             style={{
               fontSize: 11,
               letterSpacing: "0.12em",
@@ -72,8 +72,6 @@ export default async function ArticuloPage({
               marginBottom: 40,
               transition: "color 0.2s ease",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#505E80")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#5C5E57")}
           >
             ← Volver a artículos
           </Link>
@@ -115,7 +113,7 @@ export default async function ArticuloPage({
           <div style={{ marginTop: 64, paddingTop: 32, borderTop: "1px solid rgba(177,179,169,0.3)" }}>
             <Link
               href="/articulos"
-              className="font-sans"
+              className="font-sans articulo-back-link"
               style={{
                 fontSize: 11,
                 letterSpacing: "0.12em",
@@ -124,8 +122,6 @@ export default async function ArticuloPage({
                 textDecoration: "none",
                 transition: "color 0.2s ease",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#505E80")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#5C5E57")}
             >
               ← Volver a artículos
             </Link>

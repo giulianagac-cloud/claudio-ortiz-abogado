@@ -6,6 +6,8 @@
 }
 
 :root {
+  --font-newsreader: Georgia, "Times New Roman", serif;
+  --font-public-sans: Arial, Helvetica, sans-serif;
   --surface: #FBF9F4;
   --surface-container-low: #F5F4ED;
   --surface-container: #EFEEE6;
@@ -57,6 +59,10 @@ textarea:-webkit-autofill:focus {
 }
 .articulo-card:hover {
   box-shadow: 0 8px 32px rgba(80, 94, 128, 0.12);
+}
+
+.articulo-back-link:hover {
+  color: #505E80 !important;
 }
 
 /* MDX article body */
