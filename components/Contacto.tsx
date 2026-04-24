@@ -1,8 +1,11 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 type FormState = "idle" | "sending" | "sent" | "error";
+
+type Fields = { nombre: string; email: string; empresa: string; mensaje: string };
+type Touched = Record<keyof Fields, boolean>;
 
 const inputStyle: React.CSSProperties = {
   border: "none",
@@ -28,9 +31,55 @@ const labelStyle: React.CSSProperties = {
   fontFamily: "inherit",
 };
 
+function validateNombre(v: string) {
+  const t = v.trim();
+  if (!t || t.length < 3 || !/^[a-záéíóúüñA-ZÁÉÍÓÚÜÑ\s-]+$/.test(t))
+    return "Ingresá tu nombre completo";
+  return "";
+}
+
+function validateEmail(v: string) {
+  if (!v.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()))
+    return "Ingresá un correo electrónico válido";
+  return "";
+}
+
+function validateEmpresa(v: string) {
+  if (v.trim() && v.trim().length < 2)
+    return "El nombre de empresa debe tener al menos 2 caracteres";
+  return "";
+}
+
+function validateMensaje(v: string) {
+  if (!v.trim() || v.trim().length < 20)
+    return "El mensaje debe tener al menos 20 caracteres";
+  return "";
+}
+
+function getErrors(values: Fields) {
+  return {
+    nombre: validateNombre(values.nombre),
+    email: validateEmail(values.email),
+    empresa: validateEmpresa(values.empresa),
+    mensaje: validateMensaje(values.mensaje),
+  };
+}
+
 export default function Contacto() {
   const [formState, setFormState] = useState<FormState>("idle");
+  const [sentName, setSentName] = useState("");
+  const [values, setValues] = useState<Fields>({ nombre: "", email: "", empresa: "", mensaje: "" });
+  const [touched, setTouched] = useState<Touched>({ nombre: false, email: false, empresa: false, mensaje: false });
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  const errors = getErrors(values);
+  const visibleErrors = {
+    nombre: touched.nombre ? errors.nombre : "",
+    email: touched.email ? errors.email : "",
+    empresa: touched.empresa ? errors.empresa : "",
+    mensaje: touched.mensaje ? errors.mensaje : "",
+  };
+  const hasVisibleErrors = Object.values(visibleErrors).some(Boolean);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -49,8 +98,25 @@ export default function Contacto() {
     return () => observer.disconnect();
   }, []);
 
+  const handleChange = (field: keyof Fields) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setValues((v) => ({ ...v, [field]: e.target.value }));
+  };
+
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    e.currentTarget.style.borderBottomColor = "#C9A96E";
+  };
+
+  const handleBlur = (field: keyof Fields) => (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setTouched((t) => ({ ...t, [field]: true }));
+    e.currentTarget.style.borderBottomColor = "#B1B3A9";
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setTouched({ nombre: true, email: true, empresa: true, mensaje: true });
+    const allErrors = getErrors(values);
+    if (Object.values(allErrors).some(Boolean)) return;
+
     setFormState("sending");
     const form = e.currentTarget;
     const data = new FormData(form);
@@ -61,8 +127,8 @@ export default function Contacto() {
         headers: { Accept: "application/json" },
       });
       if (res.ok) {
+        setSentName(values.nombre.trim().split(" ")[0]);
         setFormState("sent");
-        form.reset();
       } else {
         setFormState("error");
       }
@@ -71,136 +137,151 @@ export default function Contacto() {
     }
   };
 
-  const handleFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    e.currentTarget.style.borderBottomColor = "#C9A96E";
-  };
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    e.currentTarget.style.borderBottomColor = "#B1B3A9";
-  };
-
   return (
     <section id="contacto" style={{ background: "#1C1C1A", padding: "96px 0" }}>
       <div ref={sectionRef} className="max-w-7xl mx-auto px-6 md:px-10">
 
-        {/* Header con contexto */}
         <div className="fade-in" style={{ marginBottom: 64 }}>
-          <p
-            className="font-sans uppercase"
-            style={{ fontSize: 10, letterSpacing: "0.18em", color: "#C9A96E", marginBottom: 16 }}
-          >
+          <p className="font-sans uppercase" style={{ fontSize: 10, letterSpacing: "0.18em", color: "#C9A96E", marginBottom: 16 }}>
             Contacto
           </p>
-          <h2
-            className="font-serif"
-            style={{
-              fontSize: "clamp(28px, 3.5vw, 44px)",
-              fontWeight: 300,
-              color: "#F5F4ED",
-              letterSpacing: "-0.025em",
-              lineHeight: 1.15,
-              marginBottom: 12,
-            }}
-          >
+          <h2 className="font-serif" style={{ fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 300, color: "#F5F4ED", letterSpacing: "-0.025em", lineHeight: 1.15, marginBottom: 12 }}>
             Iniciemos la conversación.
           </h2>
-          <p
-            className="font-serif italic"
-            style={{ fontSize: 17, color: "#7A7A72" }}
-          >
+          <p className="font-serif italic" style={{ fontSize: 17, color: "#7A7A72" }}>
             Cuéntanos qué necesitas. La consulta inicial es gratuita.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-16">
 
-          {/* Formulario (3/5) */}
           <div className="md:col-span-3 fade-in">
             <div style={{ background: "#FFFFFF", padding: "48px 40px" }}>
-              <form
-                action="https://formspree.io/f/FORM_ID"
-                method="POST"
-                onSubmit={handleSubmit}
-                className="space-y-10"
-              >
-                <div>
-                  <label htmlFor="nombre" className="font-sans" style={labelStyle}>Nombre completo</label>
-                  <input
-                    id="nombre" name="nombre" type="text" required
-                    className="font-sans" style={inputStyle}
-                    onFocus={handleFocus} onBlur={handleBlur}
-                  />
-                </div>
 
-                <div>
-                  <label htmlFor="email" className="font-sans" style={labelStyle}>Correo electrónico</label>
-                  <input
-                    id="email" name="email" type="email" required
-                    className="font-sans" style={inputStyle}
-                    onFocus={handleFocus} onBlur={handleBlur}
-                  />
-                </div>
+              {formState === "sent" ? (
+                <p className="font-serif italic" style={{ fontSize: 20, color: "#31332C", textAlign: "center", lineHeight: 1.7 }}>
+                  Gracias, {sentName}. Te contactamos en menos de 24 horas.
+                </p>
+              ) : (
+                <form
+                  action="https://formspree.io/f/FORM_ID"
+                  method="POST"
+                  onSubmit={handleSubmit}
+                  className="space-y-10"
+                >
+                  <div>
+                    <label htmlFor="nombre" className="font-sans" style={labelStyle}>Nombre completo</label>
+                    <input
+                      id="nombre" name="nombre" type="text"
+                      className="font-sans" style={inputStyle}
+                      value={values.nombre}
+                      onChange={handleChange("nombre")}
+                      onFocus={handleFocus}
+                      onBlur={handleBlur("nombre")}
+                    />
+                    {visibleErrors.nombre && (
+                      <p key={visibleErrors.nombre} className="font-sans field-error" style={{ fontSize: 11, color: "#C45C5C", marginTop: 4 }}>
+                        {visibleErrors.nombre}
+                      </p>
+                    )}
+                  </div>
 
-                <div>
-                  <label htmlFor="empresa" className="font-sans" style={labelStyle}>Empresa (opcional)</label>
-                  <input
-                    id="empresa" name="empresa" type="text"
-                    className="font-sans" style={inputStyle}
-                    onFocus={handleFocus} onBlur={handleBlur}
-                  />
-                </div>
+                  <div>
+                    <label htmlFor="email" className="font-sans" style={labelStyle}>Correo electrónico</label>
+                    <input
+                      id="email" name="email" type="text"
+                      className="font-sans" style={inputStyle}
+                      value={values.email}
+                      onChange={handleChange("email")}
+                      onFocus={handleFocus}
+                      onBlur={handleBlur("email")}
+                    />
+                    {visibleErrors.email && (
+                      <p key={visibleErrors.email} className="font-sans field-error" style={{ fontSize: 11, color: "#C45C5C", marginTop: 4 }}>
+                        {visibleErrors.email}
+                      </p>
+                    )}
+                  </div>
 
-                <div>
-                  <label htmlFor="mensaje" className="font-sans" style={labelStyle}>Mensaje</label>
-                  <textarea
-                    id="mensaje" name="mensaje" required rows={4}
-                    className="font-sans resize-none" style={inputStyle}
-                    onFocus={handleFocus} onBlur={handleBlur}
-                  />
-                </div>
+                  <div>
+                    <label htmlFor="empresa" className="font-sans" style={labelStyle}>Empresa (opcional)</label>
+                    <input
+                      id="empresa" name="empresa" type="text"
+                      className="font-sans" style={inputStyle}
+                      value={values.empresa}
+                      onChange={handleChange("empresa")}
+                      onFocus={handleFocus}
+                      onBlur={handleBlur("empresa")}
+                    />
+                    {visibleErrors.empresa && (
+                      <p key={visibleErrors.empresa} className="font-sans field-error" style={{ fontSize: 11, color: "#C45C5C", marginTop: 4 }}>
+                        {visibleErrors.empresa}
+                      </p>
+                    )}
+                  </div>
 
-                <div className="text-center pt-2">
-                  <button
-                    type="submit"
-                    disabled={formState === "sending" || formState === "sent"}
-                    className="font-sans border-none"
-                    style={{
-                      fontSize: 10,
-                      letterSpacing: "0.14em",
-                      textTransform: "uppercase",
-                      background: "#C9A96E",
-                      color: "#1C1C1A",
-                      borderRadius: 0,
-                      padding: "14px 44px",
-                      transition: "background 0.3s ease",
-                      opacity: formState === "sending" || formState === "sent" ? 0.6 : 1,
-                      cursor: formState === "sending" || formState === "sent" ? "not-allowed" : "pointer",
-                    }}
-                    onMouseEnter={(e) => { if (formState === "idle") e.currentTarget.style.background = "#B8955A"; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.background = "#C9A96E"; }}
-                  >
-                    {formState === "sending" ? "ENVIANDO..." : "SOLICITAR CONSULTA"}
-                  </button>
-
-                  <p className="mt-3 font-sans" style={{ fontSize: 11, color: "#B1B3A9", letterSpacing: "0.05em" }}>
-                    Respondemos en 24 horas
-                  </p>
-
-                  {formState === "sent" && (
-                    <p className="mt-4 font-sans text-sm" style={{ color: "#C9A96E" }}>
-                      Mensaje enviado. Nos pondremos en contacto a la brevedad.
+                  <div>
+                    <label htmlFor="mensaje" className="font-sans" style={labelStyle}>Mensaje</label>
+                    <textarea
+                      id="mensaje" name="mensaje" rows={4}
+                      className="font-sans resize-none" style={inputStyle}
+                      value={values.mensaje}
+                      onChange={handleChange("mensaje")}
+                      onFocus={handleFocus}
+                      onBlur={handleBlur("mensaje")}
+                      maxLength={1000}
+                    />
+                    <p className="font-sans" style={{ fontSize: 11, color: "#B1B3A9", marginTop: 4, textAlign: "right" }}>
+                      {values.mensaje.length} / 1000
                     </p>
-                  )}
-                  {formState === "error" && (
-                    <p className="mt-4 font-sans text-sm" style={{ color: "#7A7A72" }}>
-                      Hubo un error. Escribinos a consultas@ortizalejandre.com
+                    {visibleErrors.mensaje && (
+                      <p key={visibleErrors.mensaje} className="font-sans field-error" style={{ fontSize: 11, color: "#C45C5C", marginTop: 4 }}>
+                        {visibleErrors.mensaje}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="text-center pt-2">
+                    <button
+                      type="submit"
+                      disabled={formState === "sending" || hasVisibleErrors}
+                      className="font-sans border-none"
+                      style={{
+                        fontSize: 10,
+                        letterSpacing: "0.14em",
+                        textTransform: "uppercase",
+                        background: "#1C1C1A",
+                        color: "#F7F7FF",
+                        borderRadius: 0,
+                        padding: "14px 44px",
+                        transition: "background 0.3s ease, opacity 0.3s ease",
+                        opacity: formState === "sending" || hasVisibleErrors ? 0.5 : 1,
+                        cursor: formState === "sending" || hasVisibleErrors ? "not-allowed" : "pointer",
+                      }}
+                      onMouseEnter={(e) => { if (formState === "idle" && !hasVisibleErrors) e.currentTarget.style.background = "#2C2C2A"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.background = "#1C1C1A"; }}
+                    >
+                      {formState === "sending" ? "ENVIANDO..." : "SOLICITAR CONSULTA"}
+                    </button>
+
+                    <p className="mt-3 font-sans" style={{ fontSize: 11, color: "#B1B3A9", letterSpacing: "0.05em" }}>
+                      Respondemos en 24 horas
                     </p>
-                  )}
-                </div>
-              </form>
+
+                    {formState === "error" && (
+                      <p className="mt-4 font-sans" style={{ fontSize: 13, color: "#C45C5C" }}>
+                        Hubo un error al enviar. Intentá de nuevo o escribinos a{" "}
+                        <a href="mailto:consultas@ortizalejandre.com" style={{ color: "#C45C5C", textDecoration: "underline" }}>
+                          consultas@ortizalejandre.com
+                        </a>
+                      </p>
+                    )}
+                  </div>
+                </form>
+              )}
             </div>
           </div>
 
-          {/* Datos de contacto (2/5) */}
           <div className="md:col-span-2 fade-in flex flex-col justify-center gap-10">
             {[
               { label: "Email", value: "consultas@ortizalejandre.com" },
@@ -209,16 +290,10 @@ export default function Contacto() {
               { label: "Ubicación", value: "Buenos Aires, Argentina" },
             ].map(({ label, value }) => (
               <div key={label}>
-                <p
-                  className="font-sans uppercase mb-2"
-                  style={{ fontSize: 9, letterSpacing: "0.15em", color: "#7A7A72" }}
-                >
+                <p className="font-sans uppercase mb-2" style={{ fontSize: 9, letterSpacing: "0.15em", color: "#7A7A72" }}>
                   {label}
                 </p>
-                <p
-                  className="font-sans"
-                  style={{ fontSize: 15, color: "#F5F4ED", fontWeight: 300 }}
-                >
+                <p className="font-sans" style={{ fontSize: 15, color: "#F5F4ED", fontWeight: 300 }}>
                   {value}
                 </p>
               </div>
