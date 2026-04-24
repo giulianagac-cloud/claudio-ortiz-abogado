@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 
 const links = [
   { label: "EXPERTISE", href: "servicios" },
-  { label: "THE FIRM", href: "the-firm" },
-  { label: "CONTACT", href: "contacto" },
+  { label: "SOBRE MÍ", href: "sobre-mi" },
+  { label: "CONTACTO", href: "contacto" },
 ];
 
 export default function Navbar() {
@@ -38,11 +38,6 @@ export default function Navbar() {
   const handleLinkClick = (id: string) => {
     setMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const handleContactClick = () => {
-    setMenuOpen(false);
-    document.getElementById("contacto")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -96,55 +91,33 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* CTA + mobile toggle */}
-        <div className="flex items-center gap-4">
-          <button
-            onClick={handleContactClick}
-            className="hidden md:block font-sans cursor-pointer border-none"
-            style={{
-              fontSize: 10,
-              fontWeight: 500,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              background: "#505E80",
-              color: "#F7F7FF",
-              borderRadius: 0,
-              padding: "10px 20px",
-              transition: "background 0.3s ease",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "#445273")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "#505E80")}
-          >
-            COORDINAR CONSULTA
-          </button>
-
-          <button
-            className="md:hidden p-1 bg-transparent border-none cursor-pointer"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Menú"
-          >
-            <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
-              {menuOpen ? (
-                <>
-                  <line x1="1" y1="1" x2="21" y2="15" stroke="#31332C" strokeWidth="1.5" strokeLinecap="round" />
-                  <line x1="21" y1="1" x2="1" y2="15" stroke="#31332C" strokeWidth="1.5" strokeLinecap="round" />
-                </>
-              ) : (
-                <>
-                  <line x1="0" y1="1" x2="22" y2="1" stroke="#31332C" strokeWidth="1.5" strokeLinecap="round" />
-                  <line x1="0" y1="8" x2="22" y2="8" stroke="#31332C" strokeWidth="1.5" strokeLinecap="round" />
-                  <line x1="0" y1="15" x2="22" y2="15" stroke="#31332C" strokeWidth="1.5" strokeLinecap="round" />
-                </>
-              )}
-            </svg>
-          </button>
-        </div>
+        {/* Mobile toggle */}
+        <button
+          className="md:hidden p-1 bg-transparent border-none cursor-pointer"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Menú"
+        >
+          <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
+            {menuOpen ? (
+              <>
+                <line x1="1" y1="1" x2="21" y2="15" stroke="#31332C" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="21" y1="1" x2="1" y2="15" stroke="#31332C" strokeWidth="1.5" strokeLinecap="round" />
+              </>
+            ) : (
+              <>
+                <line x1="0" y1="1" x2="22" y2="1" stroke="#31332C" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="0" y1="8" x2="22" y2="8" stroke="#31332C" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="0" y1="15" x2="22" y2="15" stroke="#31332C" strokeWidth="1.5" strokeLinecap="round" />
+              </>
+            )}
+          </svg>
+        </button>
       </div>
 
       {/* Mobile menu */}
       <div
         style={{
-          maxHeight: menuOpen ? 320 : 0,
+          maxHeight: menuOpen ? 280 : 0,
           overflow: "hidden",
           transition: "max-height 0.4s cubic-bezier(0.4,0,0.2,1)",
           background: "rgba(251,249,244,0.97)",
@@ -168,21 +141,6 @@ export default function Navbar() {
               {link.label}
             </button>
           ))}
-          <button
-            onClick={handleContactClick}
-            className="font-sans cursor-pointer border-none w-fit"
-            style={{
-              fontSize: 10,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              background: "#505E80",
-              color: "#F7F7FF",
-              borderRadius: 0,
-              padding: "10px 20px",
-            }}
-          >
-            COORDINAR CONSULTA
-          </button>
         </nav>
       </div>
     </header>

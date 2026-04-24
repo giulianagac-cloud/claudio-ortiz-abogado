@@ -1,17 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function Hero() {
   const [phase, setPhase] = useState(0);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase(1), 200);
-    const t2 = setTimeout(() => setPhase(2), 700);
-    const t3 = setTimeout(() => setPhase(3), 1100);
-    const t4 = setTimeout(() => setPhase(4), 1500);
-    const t5 = setTimeout(() => setPhase(5), 2000);
-    return () => { [t1, t2, t3, t4, t5].forEach(clearTimeout); };
+    const t1 = setTimeout(() => setPhase(1), 100);
+    const t2 = setTimeout(() => setPhase(2), 400);
+    const t3 = setTimeout(() => setPhase(3), 700);
+    const t4 = setTimeout(() => setPhase(4), 1000);
+    return () => { [t1, t2, t3, t4].forEach(clearTimeout); };
   }, []);
 
   const show = (p: number) => phase >= p;
@@ -22,120 +22,163 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" style={{ paddingTop: 68 }}>
-
-      {/* ── BLOQUE 1: Hero principal ── */}
+    <section id="hero" style={{ background: "#FBF9F4", paddingTop: 68, minHeight: "100vh" }}>
       <div
-        className="relative overflow-hidden pt-20 pb-16 px-6 md:px-12 lg:px-16"
-        style={{ background: "#FBF9F4" }}
+        className="max-w-7xl mx-auto"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          minHeight: "calc(100vh - 68px)",
+        }}
       >
-        {/* Textura de fondo */}
+        {/* Columna izquierda — foto */}
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
           style={{
-            backgroundImage: "url('/hero-bg.jpg')",
-            opacity: 0.5,
-            zIndex: 0,
+            position: "relative",
+            overflow: "hidden",
+            minHeight: 480,
+            opacity: show(1) ? 1 : 0,
+            transition: "opacity 1s ease",
           }}
-          aria-hidden="true"
-        />
-
-        <div className="relative z-10 max-w-7xl mx-auto">
-
-          {/* Label metadata */}
-          <p
-            className="text-[11px] md:text-xs tracking-[3px] uppercase text-[#5C5E57] font-sans mb-10"
+        >
+          <Image
+            src="/equipo.jpg"
+            alt="Claudio Ortiz Alejandre"
+            fill
+            style={{ objectFit: "cover", objectPosition: "center top" }}
+            priority
+          />
+          <div
             style={{
-              opacity: show(1) ? 1 : 0,
-              transform: show(1) ? "translateY(0)" : "translateY(8px)",
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(to right, transparent 70%, #FBF9F4 100%)",
+              pointerEvents: "none",
+            }}
+          />
+        </div>
+
+        {/* Columna derecha — texto */}
+        <div
+          className="flex flex-col justify-center px-10 md:px-16 py-20"
+          style={{ background: "#FBF9F4" }}
+        >
+          <p
+            className="font-sans uppercase"
+            style={{
+              fontSize: 10,
+              letterSpacing: "0.18em",
+              color: "#5C5E57",
+              marginBottom: 32,
+              opacity: show(2) ? 1 : 0,
+              transform: show(2) ? "translateY(0)" : "translateY(10px)",
               transition: "opacity 0.8s ease, transform 0.8s ease",
             }}
           >
             Derecho Corporativo · PyMEs · Gestión &amp; Tecnología
           </p>
 
-          {/* Título principal */}
-          <div className="max-w-4xl">
-            <h1 className="m-0">
-              {/* Línea 1 */}
-              <span
-                className="block font-serif text-5xl md:text-7xl lg:text-8xl font-normal leading-[0.95] tracking-[-0.02em] text-[#31332C]"
-                style={{
-                  opacity: show(2) ? 1 : 0,
-                  transform: show(2) ? "translateY(0)" : "translateY(24px)",
-                  transition: "opacity 0.9s ease, transform 0.9s ease",
-                }}
-              >
-                Ortiz Alejandre
-              </span>
-
-              {/* Línea 2 */}
-              <span
-                className="block font-serif text-4xl md:text-5xl lg:text-6xl font-normal italic leading-[1.1] tracking-[-0.02em] text-[#31332C] mt-3"
-                style={{
-                  opacity: show(3) ? 1 : 0,
-                  transform: show(3) ? "translateY(0)" : "translateY(24px)",
-                  transition: "opacity 0.9s ease, transform 0.9s ease",
-                }}
-              >
-                Arquitectura legal
-                <br />
-                para negocios que crecen.
-              </span>
-            </h1>
-          </div>
-
-          {/* Bloque asimétrico inferior */}
-          <div
-            className="flex flex-col md:flex-row gap-10 md:gap-20 items-start md:items-end mt-16 md:mt-20"
+          <h1
+            className="font-serif"
             style={{
-              opacity: show(4) ? 1 : 0,
-              transform: show(4) ? "translateY(0)" : "translateY(12px)",
+              fontSize: "clamp(32px, 4vw, 52px)",
+              fontWeight: 400,
+              lineHeight: 1.1,
+              letterSpacing: "-0.025em",
+              color: "#31332C",
+              marginBottom: 20,
+              opacity: show(2) ? 1 : 0,
+              transform: show(2) ? "translateY(0)" : "translateY(16px)",
+              transition: "opacity 0.9s ease, transform 0.9s ease",
+            }}
+          >
+            Estructura legal que aguanta el crecimiento.
+          </h1>
+
+          <p
+            className="font-serif italic"
+            style={{
+              fontSize: "clamp(17px, 2vw, 21px)",
+              color: "#5C5E57",
+              lineHeight: 1.6,
+              marginBottom: 40,
+              opacity: show(3) ? 1 : 0,
+              transform: show(3) ? "translateY(0)" : "translateY(12px)",
               transition: "opacity 0.8s ease, transform 0.8s ease",
             }}
           >
-            {/* Columna izquierda */}
-            <div className="flex-1 max-w-md">
-              <div className="w-[120px] h-px bg-[#505E80] mb-6" />
-              <p className="font-serif italic text-base md:text-lg leading-relaxed text-[#5C5E57]">
-                Soluciones legales de alta precisión para el ecosistema empresarial de las PyMEs argentinas. Ordenamos la estructura del negocio para que pueda sostener su crecimiento.
-              </p>
-            </div>
+            Para emprendedores que no quieren sorpresas desagradables.
+          </p>
 
-            {/* Columna derecha */}
-            <div className="flex-1 md:text-right">
-              <a
-                href="#contacto"
-                onClick={handleContactClick}
-                className="text-xs tracking-[2px] uppercase text-[#31332C] border-b border-[#31332C] pb-1 inline-block hover:text-[#505E80] hover:border-[#505E80] transition-colors"
-              >
-                Coordinar consulta →
-              </a>
-            </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 12,
+              marginBottom: 48,
+              opacity: show(3) ? 1 : 0,
+              transform: show(3) ? "translateY(0)" : "translateY(10px)",
+              transition: "opacity 0.8s ease, transform 0.8s ease",
+            }}
+          >
+            {[
+              "El derecho ordena tu negocio.",
+              "La gestión lo hace crecer.",
+              "La tecnología lo automatiza.",
+            ].map((line) => (
+              <div key={line} className="flex items-center gap-3">
+                <div style={{ width: 4, height: 4, borderRadius: "50%", background: "#505E80", flexShrink: 0 }} />
+                <span className="font-sans" style={{ fontSize: 14, color: "#5C5E57", letterSpacing: "0.01em" }}>
+                  {line}
+                </span>
+              </div>
+            ))}
           </div>
 
+          <div
+            style={{
+              opacity: show(4) ? 1 : 0,
+              transform: show(4) ? "translateY(0)" : "translateY(8px)",
+              transition: "opacity 0.8s ease, transform 0.8s ease",
+            }}
+          >
+            <a
+              href="#contacto"
+              onClick={handleContactClick}
+              className="font-sans inline-block"
+              style={{
+                fontSize: 11,
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                background: "#505E80",
+                color: "#F7F7FF",
+                padding: "14px 32px",
+                textDecoration: "none",
+                transition: "background 0.3s ease",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "#445273")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "#505E80")}
+            >
+              Consultar ahora →
+            </a>
+          </div>
         </div>
       </div>
 
-      {/* ── BLOQUE 2: Tagline ── */}
+      {/* Tagline inferior */}
       <div
-        className="py-14 md:py-20 px-6"
+        className="py-12 px-6 text-center"
         style={{
           background: "#F5F4ED",
-          opacity: show(5) ? 1 : 0,
-          transform: show(5) ? "translateY(0)" : "translateY(12px)",
-          transition: "opacity 0.9s ease, transform 0.9s ease",
+          borderTop: "1px solid rgba(177,179,169,0.3)",
+          opacity: show(4) ? 1 : 0,
+          transition: "opacity 1s ease 0.3s",
         }}
       >
-        <p className="font-serif text-xl md:text-2xl lg:text-[26px] leading-[1.6] text-[#31332C] font-normal text-center">
-          <em>El derecho ordena.</em>
-          <br />
-          <em>La gestión organiza.</em>
-          <br />
-          <em>La tecnología potencia.</em>
+        <p className="font-serif italic" style={{ fontSize: "clamp(16px, 2vw, 22px)", color: "#31332C", lineHeight: 1.8 }}>
+          El derecho ordena.&nbsp;&nbsp;La gestión organiza.&nbsp;&nbsp;La tecnología potencia.
         </p>
       </div>
-
     </section>
   );
 }

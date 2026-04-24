@@ -7,37 +7,19 @@ const servicios = [
     numero: "01",
     titulo: "Derecho Societario",
     descripcion:
-      "Constitución de sociedades, gobierno corporativo, compliance, responsabilidad de administradores.",
+      "Desde la constitución hasta la gobernanza. Armamos la estructura legal que permite crecer sin sorpresas de cumplimiento: sociedades, gobierno corporativo, compliance y responsabilidad de administradores.",
   },
   {
     numero: "02",
     titulo: "Contratos Comerciales",
     descripcion:
-      "Redacción, revisión y negociación de contratos de abastecimiento, distribución y servicios.",
+      "Contratos que protegen tu negocio. Revisamos, redactamos y negociamos acuerdos de abastecimiento, distribución y servicios que balancean riesgo y oportunidad.",
   },
   {
     numero: "03",
     titulo: "Acuerdos de Accionistas",
     descripcion:
-      "Pactos entre socios, tag-along, drag-along y resolución de conflictos societarios.",
-  },
-  {
-    numero: "04",
-    titulo: "Marcas y Patentes",
-    descripcion:
-      "Registro y protección de propiedad intelectual. Defensa ante infracciones.",
-  },
-  {
-    numero: "05",
-    titulo: "Gestión y Procesos",
-    descripcion:
-      "Diagnóstico organizacional, optimización de procesos, profesionalización de PyMEs.",
-  },
-  {
-    numero: "06",
-    titulo: "Tecnología (IT)",
-    descripcion:
-      "Digitalización, automatización, herramientas de gestión, análisis de datos, seguridad.",
+      "Evitamos conflictos entre socios. Pactamos reglas claras para que el crecimiento no rompa la sociedad: tag-along, drag-along, resolución de conflictos y protocolo de salida.",
   },
 ];
 
@@ -50,7 +32,7 @@ export default function Servicios() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.querySelectorAll(".fade-in").forEach((el, i) => {
-              setTimeout(() => el.classList.add("visible"), i * 80);
+              setTimeout(() => el.classList.add("visible"), i * 100);
             });
           }
         });
@@ -62,43 +44,67 @@ export default function Servicios() {
   }, []);
 
   return (
-    <section id="servicios" style={{ background: "#F5F4ED", padding: "128px 0" }}>
+    <section id="servicios" style={{ background: "#F5F4ED", padding: "96px 0" }}>
       <div ref={sectionRef} className="max-w-7xl mx-auto px-6 md:px-10">
 
-        {/* Header centrado */}
-        <div className="text-center mb-20 fade-in">
+        <div className="fade-in" style={{ marginBottom: 64 }}>
           <p
             className="font-sans uppercase"
-            style={{ fontSize: 10, letterSpacing: "0.18em", color: "#5C5E57" }}
+            style={{ fontSize: 10, letterSpacing: "0.18em", color: "#5C5E57", marginBottom: 16 }}
           >
-            ESPECIALIDADES
+            Especialidades
           </p>
+          <h2
+            className="font-serif"
+            style={{
+              fontSize: "clamp(28px, 3.5vw, 44px)",
+              fontWeight: 400,
+              color: "#31332C",
+              letterSpacing: "-0.025em",
+              lineHeight: 1.15,
+            }}
+          >
+            En qué trabajamos.
+          </h2>
         </div>
 
-        {/* Grid 3×2 — sin cards, sin bordes */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px" style={{ background: "rgba(177,179,169,0.3)", border: "1px solid rgba(177,179,169,0.3)" }}>
           {servicios.map((s) => (
-            <div key={s.numero} className="fade-in">
+            <div
+              key={s.numero}
+              className="fade-in group"
+              style={{
+                background: "#F5F4ED",
+                padding: "48px 40px",
+                transition: "background 0.3s ease",
+                cursor: "default",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "#EFEEE6")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "#F5F4ED")}
+            >
               <span
-                className="font-serif block mb-4"
+                className="font-serif block"
                 style={{
-                  fontSize: 30,
+                  fontSize: 40,
                   color: "#505E80",
-                  letterSpacing: "-0.01em",
+                  opacity: 0.25,
                   lineHeight: 1,
+                  marginBottom: 24,
                   fontWeight: 400,
+                  letterSpacing: "-0.02em",
                 }}
               >
                 {s.numero}
               </span>
               <h3
-                className="font-serif italic mb-3"
+                className="font-serif italic"
                 style={{
-                  fontSize: 19,
+                  fontSize: 22,
                   color: "#31332C",
-                  letterSpacing: "-0.01em",
                   fontWeight: 400,
                   lineHeight: 1.2,
+                  marginBottom: 16,
+                  letterSpacing: "-0.01em",
                 }}
               >
                 {s.titulo}
@@ -108,7 +114,7 @@ export default function Servicios() {
                 style={{
                   fontSize: 14,
                   color: "#5C5E57",
-                  lineHeight: 1.8,
+                  lineHeight: 1.9,
                   fontWeight: 300,
                 }}
               >
@@ -117,6 +123,7 @@ export default function Servicios() {
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );

@@ -79,34 +79,41 @@ export default function Contacto() {
   };
 
   return (
-    <section id="contacto" style={{ background: "#EFEEE6", padding: "128px 0" }}>
+    <section id="contacto" style={{ background: "#EFEEE6", padding: "96px 0" }}>
       <div ref={sectionRef} className="max-w-7xl mx-auto px-6 md:px-10">
 
-        {/* Header centrado */}
-        <div className="text-center mb-20 fade-in">
+        {/* Header con contexto */}
+        <div className="fade-in" style={{ marginBottom: 64 }}>
           <p
-            className="font-sans uppercase mb-5"
-            style={{ fontSize: 10, letterSpacing: "0.18em", color: "#5C5E57" }}
+            className="font-sans uppercase"
+            style={{ fontSize: 10, letterSpacing: "0.18em", color: "#5C5E57", marginBottom: 16 }}
           >
-            CONTACTO
+            Contacto
           </p>
           <h2
             className="font-serif"
             style={{
-              fontSize: "clamp(28px, 4vw, 52px)",
-              color: "#31332C",
-              letterSpacing: "-0.02em",
+              fontSize: "clamp(28px, 3.5vw, 44px)",
               fontWeight: 400,
-              lineHeight: 1.1,
+              color: "#31332C",
+              letterSpacing: "-0.025em",
+              lineHeight: 1.15,
+              marginBottom: 12,
             }}
           >
-            Inicie la conversación legal.
+            Iniciemos la conversación.
           </h2>
+          <p
+            className="font-serif italic"
+            style={{ fontSize: 17, color: "#5C5E57" }}
+          >
+            Cuéntanos qué necesitas. La consulta inicial es gratuita.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-16">
 
-          {/* Formulario en card blanca (3/5) */}
+          {/* Formulario (3/5) */}
           <div className="md:col-span-3 fade-in">
             <div style={{ background: "#FFFFFF", padding: "48px 40px" }}>
               <form
@@ -116,50 +123,38 @@ export default function Contacto() {
                 className="space-y-10"
               >
                 <div>
-                  <label htmlFor="nombre" className="font-sans" style={labelStyle}>
-                    NOMBRE COMPLETO
-                  </label>
+                  <label htmlFor="nombre" className="font-sans" style={labelStyle}>Nombre completo</label>
                   <input
-                    id="nombre"
-                    name="nombre"
-                    type="text"
-                    required
-                    className="font-sans"
-                    style={inputStyle}
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
+                    id="nombre" name="nombre" type="text" required
+                    className="font-sans" style={inputStyle}
+                    onFocus={handleFocus} onBlur={handleBlur}
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="font-sans" style={labelStyle}>
-                    CORREO ELECTRÓNICO
-                  </label>
+                  <label htmlFor="email" className="font-sans" style={labelStyle}>Correo electrónico</label>
                   <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    className="font-sans"
-                    style={inputStyle}
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
+                    id="email" name="email" type="email" required
+                    className="font-sans" style={inputStyle}
+                    onFocus={handleFocus} onBlur={handleBlur}
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="mensaje" className="font-sans" style={labelStyle}>
-                    MENSAJE
-                  </label>
+                  <label htmlFor="empresa" className="font-sans" style={labelStyle}>Empresa (opcional)</label>
+                  <input
+                    id="empresa" name="empresa" type="text"
+                    className="font-sans" style={inputStyle}
+                    onFocus={handleFocus} onBlur={handleBlur}
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="mensaje" className="font-sans" style={labelStyle}>Mensaje</label>
                   <textarea
-                    id="mensaje"
-                    name="mensaje"
-                    required
-                    rows={4}
-                    className="font-sans resize-none"
-                    style={inputStyle}
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
+                    id="mensaje" name="mensaje" required rows={4}
+                    className="font-sans resize-none" style={inputStyle}
+                    onFocus={handleFocus} onBlur={handleBlur}
                   />
                 </div>
 
@@ -178,36 +173,26 @@ export default function Contacto() {
                       padding: "14px 44px",
                       transition: "background 0.3s ease",
                       opacity: formState === "sending" || formState === "sent" ? 0.6 : 1,
-                      cursor:
-                        formState === "sending" || formState === "sent"
-                          ? "not-allowed"
-                          : "pointer",
+                      cursor: formState === "sending" || formState === "sent" ? "not-allowed" : "pointer",
                     }}
-                    onMouseEnter={(e) => {
-                      if (formState === "idle")
-                        e.currentTarget.style.background = "#445273";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = "#505E80";
-                    }}
+                    onMouseEnter={(e) => { if (formState === "idle") e.currentTarget.style.background = "#445273"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.background = "#505E80"; }}
                   >
-                    {formState === "sending" ? "ENVIANDO..." : "ENVIAR SOLICITUD"}
+                    {formState === "sending" ? "ENVIANDO..." : "SOLICITAR CONSULTA"}
                   </button>
 
+                  <p className="mt-3 font-sans" style={{ fontSize: 11, color: "#B1B3A9", letterSpacing: "0.05em" }}>
+                    Respondemos en 24 horas
+                  </p>
+
                   {formState === "sent" && (
-                    <p
-                      className="mt-4 font-sans text-sm"
-                      style={{ color: "#5C5E57" }}
-                    >
+                    <p className="mt-4 font-sans text-sm" style={{ color: "#505E80" }}>
                       Mensaje enviado. Nos pondremos en contacto a la brevedad.
                     </p>
                   )}
                   {formState === "error" && (
-                    <p
-                      className="mt-4 font-sans text-sm"
-                      style={{ color: "#5C5E57" }}
-                    >
-                      Hubo un error. Escribanos a consultas@ortizalejandre.com
+                    <p className="mt-4 font-sans text-sm" style={{ color: "#5C5E57" }}>
+                      Hubo un error. Escribinos a consultas@ortizalejandre.com
                     </p>
                   )}
                 </div>
@@ -218,10 +203,10 @@ export default function Contacto() {
           {/* Datos de contacto (2/5) */}
           <div className="md:col-span-2 fade-in flex flex-col justify-center gap-10">
             {[
-              { label: "EMAIL", value: "consultas@ortizalejandre.com" },
-              { label: "TELÉFONO", value: "+54 11 5640-0469" },
-              { label: "HORARIO", value: "Lunes a Viernes 10–19hs" },
-              { label: "UBICACIÓN", value: "Buenos Aires, Argentina" },
+              { label: "Email", value: "consultas@ortizalejandre.com" },
+              { label: "Teléfono", value: "+54 11 5640-0469" },
+              { label: "Horario", value: "Lunes a Viernes 10–19hs" },
+              { label: "Ubicación", value: "Buenos Aires, Argentina" },
             ].map(({ label, value }) => (
               <div key={label}>
                 <p
@@ -239,6 +224,7 @@ export default function Contacto() {
               </div>
             ))}
           </div>
+
         </div>
       </div>
     </section>

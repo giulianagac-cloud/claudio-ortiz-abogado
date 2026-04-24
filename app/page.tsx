@@ -1,9 +1,8 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import NuestraVision from "@/components/NuestraVision";
+import QueEsOrtiz from "@/components/QueEsOrtiz";
 import Servicios from "@/components/Servicios";
-import TheFirm from "@/components/TheFirm";
-import Tagline from "@/components/Tagline";
+import SobreMi from "@/components/SobreMi";
 import Contacto from "@/components/Contacto";
 import Footer from "@/components/Footer";
 
@@ -13,10 +12,9 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <NuestraVision />
+        <QueEsOrtiz />
         <Servicios />
-        <TheFirm />
-        <Tagline />
+        <SobreMi />
         <Contacto />
         <Footer />
       </main>
