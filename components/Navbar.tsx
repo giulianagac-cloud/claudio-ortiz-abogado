@@ -1,14 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
-const links = [
+const scrollLinks = [
   { label: "EXPERTISE", href: "servicios" },
   { label: "SOBRE MÍ", href: "sobre-mi" },
   { label: "CONTACTO", href: "contacto" },
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -20,6 +23,7 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    if (pathname !== "/") return;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -28,17 +32,23 @@ export default function Navbar() {
       },
       { threshold: 0.4 }
     );
-    links.forEach(({ href }) => {
+    scrollLinks.forEach(({ href }) => {
       const el = document.getElementById(href);
       if (el) observer.observe(el);
     });
     return () => observer.disconnect();
-  }, []);
+  }, [pathname]);
 
-  const handleLinkClick = (id: string) => {
+  const handleScrollLink = (id: string) => {
     setMenuOpen(false);
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    if (pathname !== "/") {
+      window.location.href = `/#${id}`;
+    } else {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    }
   };
+
+  const isArticulosActive = pathname.startsWith("/articulos");
 
   return (
     <header
@@ -59,7 +69,13 @@ export default function Navbar() {
       >
         {/* Brand */}
         <button
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          onClick={() => {
+            if (pathname !== "/") {
+              window.location.href = "/";
+            } else {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
           className="cursor-pointer bg-transparent border-none p-0"
         >
           <span
@@ -72,10 +88,10 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-10">
-          {links.map((link) => (
+          {scrollLinks.map((link) => (
             <button
               key={link.href}
-              onClick={() => handleLinkClick(link.href)}
+              onClick={() => handleScrollLink(link.href)}
               className="font-sans cursor-pointer bg-transparent border-none p-0"
               style={{
                 fontSize: 10,
@@ -89,6 +105,21 @@ export default function Navbar() {
               {link.label}
             </button>
           ))}
+          <Link
+            href="/articulos"
+            className="font-sans"
+            style={{
+              fontSize: 10,
+              fontWeight: 500,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              textDecoration: "none",
+              color: isArticulosActive ? "#505E80" : "#5C5E57",
+              transition: "color 0.3s ease",
+            }}
+          >
+            ARTÍCULOS
+          </Link>
         </nav>
 
         {/* Mobile toggle */}
@@ -117,7 +148,7 @@ export default function Navbar() {
       {/* Mobile menu */}
       <div
         style={{
-          maxHeight: menuOpen ? 280 : 0,
+          maxHeight: menuOpen ? 320 : 0,
           overflow: "hidden",
           transition: "max-height 0.4s cubic-bezier(0.4,0,0.2,1)",
           background: "rgba(251,249,244,0.97)",
@@ -125,10 +156,10 @@ export default function Navbar() {
         }}
       >
         <nav className="flex flex-col px-6 py-8 gap-6">
-          {links.map((link) => (
+          {scrollLinks.map((link) => (
             <button
               key={link.href}
-              onClick={() => handleLinkClick(link.href)}
+              onClick={() => handleScrollLink(link.href)}
               className="font-sans text-left cursor-pointer bg-transparent border-none p-0"
               style={{
                 fontSize: 11,
@@ -141,6 +172,21 @@ export default function Navbar() {
               {link.label}
             </button>
           ))}
+          <Link
+            href="/articulos"
+            onClick={() => setMenuOpen(false)}
+            className="font-sans"
+            style={{
+              fontSize: 11,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              textDecoration: "none",
+              color: isArticulosActive ? "#505E80" : "#5C5E57",
+              transition: "color 0.3s ease",
+            }}
+          >
+            ARTÍCULOS
+          </Link>
         </nav>
       </div>
     </header>
