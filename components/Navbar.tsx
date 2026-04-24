@@ -7,8 +7,9 @@ import Link from "next/link";
 const scrollLinks = [
   { label: "EXPERTISE", href: "servicios" },
   { label: "SOBRE MÍ", href: "sobre-mi" },
-  { label: "CONTACTO", href: "contacto" },
 ];
+
+const contactLink = { label: "CONTACTO", href: "contacto" };
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -32,7 +33,7 @@ export default function Navbar() {
       },
       { threshold: 0.4 }
     );
-    scrollLinks.forEach(({ href }) => {
+    [...scrollLinks, contactLink].forEach(({ href }) => {
       const el = document.getElementById(href);
       if (el) observer.observe(el);
     });
@@ -120,6 +121,20 @@ export default function Navbar() {
           >
             ARTÍCULOS
           </Link>
+          <button
+            onClick={() => handleScrollLink(contactLink.href)}
+            className="font-sans cursor-pointer bg-transparent border-none p-0"
+            style={{
+              fontSize: 10,
+              fontWeight: 500,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: activeSection === contactLink.href ? "#505E80" : "#5C5E57",
+              transition: "color 0.3s ease",
+            }}
+          >
+            {contactLink.label}
+          </button>
         </nav>
 
         {/* Mobile toggle */}
@@ -187,6 +202,19 @@ export default function Navbar() {
           >
             ARTÍCULOS
           </Link>
+          <button
+            onClick={() => handleScrollLink(contactLink.href)}
+            className="font-sans text-left cursor-pointer bg-transparent border-none p-0"
+            style={{
+              fontSize: 11,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: activeSection === contactLink.href ? "#505E80" : "#5C5E57",
+              transition: "color 0.3s ease",
+            }}
+          >
+            {contactLink.label}
+          </button>
         </nav>
       </div>
     </header>
