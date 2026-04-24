@@ -3,23 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 
 type FormState = "idle" | "sending" | "sent" | "error";
-
 type Fields = { nombre: string; email: string; empresa: string; mensaje: string };
-type Touched = Record<keyof Fields, boolean>;
-
-const inputStyle: React.CSSProperties = {
-  border: "none",
-  borderBottom: "1px solid #B1B3A9",
-  borderRadius: 0,
-  padding: "10px 0",
-  fontSize: 15,
-  color: "#31332C",
-  outline: "none",
-  width: "100%",
-  background: "transparent",
-  fontFamily: "inherit",
-  transition: "border-color 0.3s ease",
-};
+type FieldFlags = Record<keyof Fields, boolean>;
 
 const labelStyle: React.CSSProperties = {
   fontSize: 9,
@@ -33,8 +18,9 @@ const labelStyle: React.CSSProperties = {
 
 function validateNombre(v: string) {
   const t = v.trim();
-  if (!t || t.length < 3 || !/^[a-záéíóúüñA-ZÁÉÍÓÚÜÑ\s-]+$/.test(t))
-    return "Ingresá tu nombre completo";
+  if (!t) return "Ingresá tu nombre completo";
+  if (!/^[a-záéíóúüñA-ZÁÉÍÓÚÜÑ\s-]+$/.test(t)) return "Solo se permiten letras y espacios";
+  if (t.length < 3) return "Ingresá tu nombre completo";
   return "";
 }
 
@@ -56,6 +42,8 @@ function validateMensaje(v: string) {
   return "";
 }
 
+const validators = { nombre: validateNombre, email: validateEmail, empresa: validateEmpresa, mensaje: validateMensaje };
+
 function getErrors(values: Fields) {
   return {
     nombre: validateNombre(values.nombre),
@@ -65,19 +53,38 @@ function getErrors(values: Fields) {
   };
 }
 
+function getBorderColor(field: keyof Fields, value: string, evaluated: boolean, isFocused: boolean): string {
+  if (isFocused) return "#1C1C1A";
+  const hasError = validators[field](value) !== "";
+  if (evaluated && hasError) return "#C45C5C";
+  if (evaluated && !hasError && value.trim()) return "#6A9E7A";
+  return "#B1B3A9";
+}
+
+const falseFlags: FieldFlags = { nombre: false, email: false, empresa: false, mensaje: false };
+
 export default function Contacto() {
   const [formState, setFormState] = useState<FormState>("idle");
   const [sentName, setSentName] = useState("");
   const [values, setValues] = useState<Fields>({ nombre: "", email: "", empresa: "", mensaje: "" });
-  const [touched, setTouched] = useState<Touched>({ nombre: false, email: false, empresa: false, mensaje: false });
+  const [touched, setTouched] = useState<FieldFlags>({ ...falseFlags });
+  const [focused, setFocused] = useState<FieldFlags>({ ...falseFlags });
+  const [shaking, setShaking] = useState<FieldFlags>({ ...falseFlags });
+  const [submitAttempted, setSubmitAttempted] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const errors = getErrors(values);
+  const evaluated = {
+    nombre: touched.nombre || submitAttempted,
+    email: touched.email || submitAttempted,
+    empresa: touched.empresa || submitAttempted,
+    mensaje: touched.mensaje || submitAttempted,
+  };
   const visibleErrors = {
-    nombre: touched.nombre ? errors.nombre : "",
-    email: touched.email ? errors.email : "",
-    empresa: touched.empresa ? errors.empresa : "",
-    mensaje: touched.mensaje ? errors.mensaje : "",
+    nombre: evaluated.nombre ? errors.nombre : "",
+    email: evaluated.email ? errors.email : "",
+    empresa: evaluated.empresa ? errors.empresa : "",
+    mensaje: evaluated.mensaje ? errors.mensaje : "",
   };
   const hasVisibleErrors = Object.values(visibleErrors).some(Boolean);
 
@@ -99,23 +106,39 @@ export default function Contacto() {
   }, []);
 
   const handleChange = (field: keyof Fields) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setValues((v) => ({ ...v, [field]: e.target.value }));
+    const val = e.target.value;
+    setValues((v) => ({ ...v, [field]: val }));
+    if (field === "nombre" && val && !/^[a-záéíóúüñA-ZÁÉÍÓÚÜÑ\s-]*$/.test(val)) {
+      setTouched((t) => ({ ...t, nombre: true }));
+    }
   };
 
-  const handleFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    e.currentTarget.style.borderBottomColor = "#C9A96E";
+  const handleFocus = (field: keyof Fields) => () => {
+    setFocused((f) => ({ ...f, [field]: true }));
   };
 
-  const handleBlur = (field: keyof Fields) => (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleBlur = (field: keyof Fields) => () => {
+    setFocused((f) => ({ ...f, [field]: false }));
     setTouched((t) => ({ ...t, [field]: true }));
-    e.currentTarget.style.borderBottomColor = "#B1B3A9";
+  };
+
+  const triggerShake = (fields: (keyof Fields)[]) => {
+    const next = { ...falseFlags };
+    fields.forEach((f) => { next[f] = true; });
+    setShaking(next);
+    setTimeout(() => setShaking({ ...falseFlags }), 350);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSubmitAttempted(true);
     setTouched({ nombre: true, email: true, empresa: true, mensaje: true });
     const allErrors = getErrors(values);
-    if (Object.values(allErrors).some(Boolean)) return;
+    const errorFields = (Object.keys(allErrors) as (keyof Fields)[]).filter((f) => allErrors[f]);
+    if (errorFields.length > 0) {
+      triggerShake(errorFields);
+      return;
+    }
 
     setFormState("sending");
     const form = e.currentTarget;
@@ -136,6 +159,20 @@ export default function Contacto() {
       setFormState("error");
     }
   };
+
+  const fieldStyle = (field: keyof Fields): React.CSSProperties => ({
+    border: "none",
+    borderBottom: `1px solid ${getBorderColor(field, values[field], evaluated[field], focused[field])}`,
+    borderRadius: 0,
+    padding: "10px 0",
+    fontSize: 15,
+    color: "#31332C",
+    outline: "none",
+    width: "100%",
+    background: "transparent",
+    fontFamily: "inherit",
+    transition: "border-color 0.2s ease",
+  });
 
   return (
     <section id="contacto" style={{ background: "#1C1C1A", padding: "96px 0" }}>
@@ -173,10 +210,11 @@ export default function Contacto() {
                     <label htmlFor="nombre" className="font-sans" style={labelStyle}>Nombre completo</label>
                     <input
                       id="nombre" name="nombre" type="text"
-                      className="font-sans" style={inputStyle}
+                      className={`font-sans${shaking.nombre ? " input-error" : ""}`}
+                      style={fieldStyle("nombre")}
                       value={values.nombre}
                       onChange={handleChange("nombre")}
-                      onFocus={handleFocus}
+                      onFocus={handleFocus("nombre")}
                       onBlur={handleBlur("nombre")}
                     />
                     {visibleErrors.nombre && (
@@ -190,10 +228,11 @@ export default function Contacto() {
                     <label htmlFor="email" className="font-sans" style={labelStyle}>Correo electrónico</label>
                     <input
                       id="email" name="email" type="text"
-                      className="font-sans" style={inputStyle}
+                      className={`font-sans${shaking.email ? " input-error" : ""}`}
+                      style={fieldStyle("email")}
                       value={values.email}
                       onChange={handleChange("email")}
-                      onFocus={handleFocus}
+                      onFocus={handleFocus("email")}
                       onBlur={handleBlur("email")}
                     />
                     {visibleErrors.email && (
@@ -207,10 +246,11 @@ export default function Contacto() {
                     <label htmlFor="empresa" className="font-sans" style={labelStyle}>Empresa (opcional)</label>
                     <input
                       id="empresa" name="empresa" type="text"
-                      className="font-sans" style={inputStyle}
+                      className={`font-sans${shaking.empresa ? " input-error" : ""}`}
+                      style={fieldStyle("empresa")}
                       value={values.empresa}
                       onChange={handleChange("empresa")}
-                      onFocus={handleFocus}
+                      onFocus={handleFocus("empresa")}
                       onBlur={handleBlur("empresa")}
                     />
                     {visibleErrors.empresa && (
@@ -224,14 +264,15 @@ export default function Contacto() {
                     <label htmlFor="mensaje" className="font-sans" style={labelStyle}>Mensaje</label>
                     <textarea
                       id="mensaje" name="mensaje" rows={4}
-                      className="font-sans resize-none" style={inputStyle}
+                      className={`font-sans resize-none${shaking.mensaje ? " input-error" : ""}`}
+                      style={fieldStyle("mensaje")}
                       value={values.mensaje}
                       onChange={handleChange("mensaje")}
-                      onFocus={handleFocus}
+                      onFocus={handleFocus("mensaje")}
                       onBlur={handleBlur("mensaje")}
                       maxLength={1000}
                     />
-                    <p className="font-sans" style={{ fontSize: 11, color: "#B1B3A9", marginTop: 4, textAlign: "right" }}>
+                    <p className="font-sans" style={{ fontSize: 11, color: values.mensaje.length >= 1000 ? "#C45C5C" : "#B1B3A9", marginTop: 4, textAlign: "right", transition: "color 0.2s ease" }}>
                       {values.mensaje.length} / 1000
                     </p>
                     {visibleErrors.mensaje && (
