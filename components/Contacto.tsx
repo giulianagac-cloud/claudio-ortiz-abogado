@@ -164,14 +164,14 @@ export default function Contacto() {
     border: "none",
     borderBottom: `1px solid ${getBorderColor(field, values[field], evaluated[field], focused[field])}`,
     borderRadius: 0,
-    padding: "10px 0",
+    padding: "10px 0 14px",
     fontSize: 15,
     color: "#31332C",
     outline: "none",
     width: "100%",
-    background: "transparent",
+    background: focused[field] ? "rgba(28,28,26,0.03)" : "transparent",
     fontFamily: "inherit",
-    transition: "border-color 0.2s ease",
+    transition: "border-color 0.2s ease, background 0.2s ease",
   });
 
   return (
@@ -193,7 +193,7 @@ export default function Contacto() {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-16">
 
           <div className="md:col-span-3 fade-in">
-            <div style={{ background: "#FFFFFF", padding: "48px 40px" }}>
+            <div style={{ background: "#FFFFFF", padding: "48px 40px", borderRadius: 2, boxShadow: "0 8px 48px rgba(0,0,0,0.18)", border: "1px solid rgba(255,255,255,0.06)" }}>
 
               {formState === "sent" ? (
                 <p className="font-serif italic" style={{ fontSize: 20, color: "#31332C", textAlign: "center", lineHeight: 1.7 }}>
@@ -282,7 +282,7 @@ export default function Contacto() {
                     )}
                   </div>
 
-                  <div className="text-center pt-2">
+                  <div className="pt-2">
                     <button
                       type="submit"
                       disabled={formState === "sending" || hasVisibleErrors}
@@ -293,8 +293,9 @@ export default function Contacto() {
                         textTransform: "uppercase",
                         background: "#1C1C1A",
                         color: "#F7F7FF",
-                        borderRadius: 0,
-                        padding: "14px 44px",
+                        borderRadius: 1,
+                        padding: "18px 44px",
+                        width: "100%",
                         transition: "background 0.3s ease, opacity 0.3s ease",
                         opacity: formState === "sending" || hasVisibleErrors ? 0.5 : 1,
                         cursor: formState === "sending" || hasVisibleErrors ? "not-allowed" : "pointer",
@@ -305,8 +306,8 @@ export default function Contacto() {
                       {formState === "sending" ? "ENVIANDO..." : "SOLICITAR CONSULTA"}
                     </button>
 
-                    <p className="mt-3 font-sans" style={{ fontSize: 11, color: "#B1B3A9", letterSpacing: "0.05em" }}>
-                      Respondemos en 24 horas
+                    <p className="font-sans" style={{ fontSize: 11, color: "#B1B3A9", letterSpacing: "0.05em", marginTop: 16 }}>
+                      · Respondemos en 24 horas
                     </p>
 
                     {formState === "error" && (
