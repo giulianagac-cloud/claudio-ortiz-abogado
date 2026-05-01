@@ -182,7 +182,7 @@ export default function Contacto() {
           <p className="font-sans uppercase" style={{ fontSize: 10, letterSpacing: "0.18em", color: "#C9A96E", marginBottom: 16 }}>
             Contacto
           </p>
-          <h2 className="font-serif" style={{ fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 300, color: "#F5F4ED", letterSpacing: "-0.025em", lineHeight: 1.15, marginBottom: 12 }}>
+          <h2 className="font-serif section-title" style={{ fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 300, color: "#F5F4ED", letterSpacing: "-0.025em", lineHeight: 1.15, marginBottom: 12 }}>
             Iniciemos la conversación.
           </h2>
           <p className="font-serif italic" style={{ fontSize: 17, color: "#7A7A72" }}>

@@ -2,33 +2,60 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function SobreMi() {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll(".fade-in").forEach((el, i) => {
-              setTimeout(() => el.classList.add("visible"), i * 120);
-            });
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
+    const ctx = gsap.context(() => {
+      // ClipPath reveal foto Claudio (izquierda → derecha)
+      gsap.fromTo(
+        ".foto-claudio",
+        { clipPath: "inset(0 100% 0 0)", opacity: 0 },
+        {
+          clipPath: "inset(0 0% 0 0%)",
+          opacity: 1,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".foto-claudio",
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // ClipPath reveal foto Nexora (derecha → izquierda)
+      gsap.fromTo(
+        ".foto-nexora",
+        { clipPath: "inset(0 0 0 100%)", opacity: 0 },
+        {
+          clipPath: "inset(0 0% 0 0%)",
+          opacity: 1,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".foto-nexora",
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section id="sobre-nosotros" style={{ background: "#F8F6F1", padding: "96px 0" }}>
-      <div ref={sectionRef} className="max-w-7xl mx-auto px-6 md:px-10">
+    <section ref={sectionRef} id="sobre-nosotros" style={{ background: "#F8F6F1", padding: "96px 0" }}>
+      <div className="max-w-7xl mx-auto px-6 md:px-10">
 
         {/* Bloque A — Introducción del estudio */}
-        <div className="fade-in" style={{ maxWidth: "48rem", marginBottom: 80 }}>
+        <div style={{ maxWidth: "48rem", marginBottom: 80 }}>
           <p
             className="font-sans uppercase"
             style={{ fontSize: 10, letterSpacing: "0.18em", color: "#C9A96E", marginBottom: 16 }}
@@ -36,7 +63,7 @@ export default function SobreMi() {
             Quiénes Somos
           </p>
           <h2
-            className="font-serif"
+            className="font-serif section-title"
             style={{
               fontSize: "clamp(28px, 3.5vw, 44px)",
               fontWeight: 300,
@@ -66,8 +93,11 @@ export default function SobreMi() {
             style={{ gap: "64px", alignItems: "center", marginBottom: 80 }}
           >
             {/* Foto */}
-            <div className="fade-in">
-              <div style={{ position: "relative", width: "100%", aspectRatio: "3/4", overflow: "hidden", maxWidth: 480 }}>
+            <div>
+              <div
+                className="foto-claudio"
+                style={{ position: "relative", width: "100%", aspectRatio: "3/4", overflow: "hidden", maxWidth: 480 }}
+              >
                 <Image
                   src="/claudio.jpeg"
                   alt="Claudio Enrique Ortiz"
@@ -93,7 +123,7 @@ export default function SobreMi() {
 
             {/* Texto */}
             <div>
-              <div className="fade-in" style={{ marginBottom: 40 }}>
+              <div style={{ marginBottom: 40 }}>
                 <p
                   className="font-sans uppercase"
                   style={{ fontSize: 10, letterSpacing: "0.18em", color: "#C9A96E", marginBottom: 16 }}
@@ -101,7 +131,7 @@ export default function SobreMi() {
                   Sobre Claudio
                 </p>
                 <h2
-                  className="font-serif"
+                  className="font-serif section-title"
                   style={{
                     fontSize: "clamp(28px, 3.5vw, 44px)",
                     fontWeight: 300,
@@ -116,7 +146,7 @@ export default function SobreMi() {
                 <div style={{ width: 48, height: 2, background: "#C9A96E", marginTop: 20 }} />
               </div>
 
-              <div className="fade-in" style={{ display: "flex", flexDirection: "column", gap: 20, marginBottom: 40 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 20, marginBottom: 40 }}>
                 <p
                   className="font-sans"
                   style={{ fontSize: 16, color: "#0F1628", lineHeight: 1.85, fontWeight: 300 }}
@@ -131,7 +161,7 @@ export default function SobreMi() {
                 </p>
               </div>
 
-              <div className="fade-in" style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                 {[
                   { titulo: "Abogado accesible", desc: "Comunicación clara, sin jerga innecesaria." },
                   { titulo: "Tech-native", desc: "Automatización y herramientas digitales integradas al trabajo legal." },
@@ -180,7 +210,7 @@ export default function SobreMi() {
           >
             {/* Texto (izquierda) */}
             <div>
-              <div className="fade-in" style={{ marginBottom: 40 }}>
+              <div style={{ marginBottom: 40 }}>
                 <p
                   className="font-sans uppercase"
                   style={{ fontSize: 10, letterSpacing: "0.18em", color: "#C9A96E", marginBottom: 16 }}
@@ -203,7 +233,7 @@ export default function SobreMi() {
                 <div style={{ width: 48, height: 2, background: "#C9A96E", marginTop: 20 }} />
               </div>
 
-              <div className="fade-in" style={{ marginBottom: 32 }}>
+              <div style={{ marginBottom: 32 }}>
                 <p
                   className="font-sans"
                   style={{ fontSize: 16, color: "#0F1628", lineHeight: 1.85, fontWeight: 300 }}
@@ -212,7 +242,7 @@ export default function SobreMi() {
                 </p>
               </div>
 
-              <div className="fade-in">
+              <div>
                 <a
                   href="https://nexoraintelligence.co"
                   target="_blank"
@@ -235,8 +265,11 @@ export default function SobreMi() {
             </div>
 
             {/* Foto (derecha) */}
-            <div className="fade-in">
-              <div style={{ position: "relative", width: "100%", aspectRatio: "3/4", overflow: "hidden", maxWidth: 480 }}>
+            <div>
+              <div
+                className="foto-nexora"
+                style={{ position: "relative", width: "100%", aspectRatio: "3/4", overflow: "hidden", maxWidth: 480 }}
+              >
                 <Image
                   src="/nexora.png"
                   alt="Nexora Intelligence"

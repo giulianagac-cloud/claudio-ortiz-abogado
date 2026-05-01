@@ -1,28 +1,90 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
-  const [phase, setPhase] = useState(0);
-
-  useEffect(() => {
-    const t1 = setTimeout(() => setPhase(1), 100);
-    const t2 = setTimeout(() => setPhase(2), 400);
-    const t3 = setTimeout(() => setPhase(3), 700);
-    const t4 = setTimeout(() => setPhase(4), 1000);
-    return () => { [t1, t2, t3, t4].forEach(clearTimeout); };
-  }, []);
-
-  const show = (p: number) => phase >= p;
+  const sectionRef = useRef<HTMLElement>(null);
 
   const handleContactClick = (e: React.MouseEvent) => {
     e.preventDefault();
     document.getElementById("contacto")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const isMobile = window.innerWidth < 768;
+
+      // Foto: scale + fade
+      gsap.fromTo(
+        ".hero-photo",
+        { scale: 1.08, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 1.4, ease: "power2.out" }
+      );
+
+      // Label
+      gsap.fromTo(
+        ".hero-label",
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: "power2.out", delay: 0.3 }
+      );
+
+      // H1
+      gsap.fromTo(
+        ".hero-title",
+        { y: 60, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.9, ease: "power2.out", delay: 0.5 }
+      );
+
+      // Subtitle italic
+      gsap.fromTo(
+        ".hero-subtitle",
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: "power2.out", delay: 0.7 }
+      );
+
+      // Bullets con stagger
+      gsap.fromTo(
+        ".hero-bullet",
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: "power2.out", stagger: 0.1, delay: 0.9 }
+      );
+
+      // CTA
+      gsap.fromTo(
+        ".hero-cta",
+        { y: 15, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.7, ease: "power2.out", delay: 1.1 }
+      );
+
+      // Parallax scroll en la foto (solo desktop)
+      if (!isMobile) {
+        gsap.to(".hero-photo", {
+          yPercent: -12,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.5,
+          },
+        });
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="hero" style={{ background: "#FBF9F4", paddingTop: 68, minHeight: "100vh", overflow: "hidden" }}>
+    <section
+      ref={sectionRef}
+      id="hero"
+      style={{ background: "#FBF9F4", paddingTop: 68, minHeight: "100vh", overflow: "hidden" }}
+    >
       <div
         className="max-w-7xl mx-auto hero-grid"
         style={{
@@ -38,8 +100,6 @@ export default function Hero() {
             overflow: "hidden",
             minWidth: 0,
             minHeight: "clamp(360px, 55vw, 480px)",
-            opacity: show(1) ? 1 : 0,
-            transition: "opacity 1s ease",
           }}
         >
           <Image
@@ -71,22 +131,19 @@ export default function Hero() {
           }}
         >
           <p
-            className="font-sans uppercase hero-copy-limited"
+            className="font-sans uppercase hero-copy-limited hero-label"
             style={{
               fontSize: 10,
               letterSpacing: "0.18em",
               color: "#5C5E57",
               marginBottom: 20,
-              opacity: show(2) ? 1 : 0,
-              transform: show(2) ? "translateY(0)" : "translateY(10px)",
-              transition: "opacity 0.8s ease, transform 0.8s ease",
             }}
           >
             Ab. Claudio Ortiz — Nexora Intelligence
           </p>
 
           <h1
-            className="font-serif hero-copy-limited"
+            className="font-serif hero-copy-limited hero-title"
             style={{
               fontSize: "clamp(28px, 7vw, 52px)",
               fontWeight: 400,
@@ -96,16 +153,13 @@ export default function Hero() {
               marginBottom: 20,
               maxWidth: "100%",
               overflowWrap: "break-word",
-              opacity: show(2) ? 1 : 0,
-              transform: show(2) ? "translateY(0)" : "translateY(16px)",
-              transition: "opacity 0.9s ease, transform 0.9s ease",
             }}
           >
             Estudio Ortiz Alejandre
           </h1>
 
           <p
-            className="font-serif italic hero-copy-limited"
+            className="font-serif italic hero-copy-limited hero-subtitle"
             style={{
               fontSize: "clamp(17px, 2vw, 21px)",
               color: "#5C5E57",
@@ -113,12 +167,13 @@ export default function Hero() {
               marginBottom: 40,
               maxWidth: "100%",
               overflowWrap: "break-word",
-              opacity: show(3) ? 1 : 0,
-              transform: show(3) ? "translateY(0)" : "translateY(12px)",
-              transition: "opacity 0.8s ease, transform 0.8s ease",
             }}
           >
-            Derecho corporativo, gestión y tecnología <span className="hero-line-break"><br /></span>al servicio de las empresas argentinas.
+            Derecho corporativo, gestión y tecnología{" "}
+            <span className="hero-line-break">
+              <br />
+            </span>
+            al servicio de las empresas argentinas.
           </p>
 
           <div
@@ -128,9 +183,6 @@ export default function Hero() {
               flexDirection: "column",
               gap: 12,
               marginBottom: 48,
-              opacity: show(3) ? 1 : 0,
-              transform: show(3) ? "translateY(0)" : "translateY(10px)",
-              transition: "opacity 0.8s ease, transform 0.8s ease",
             }}
           >
             {[
@@ -138,23 +190,21 @@ export default function Hero() {
               "La gestión lo hace crecer.",
               "La tecnología lo automatiza.",
             ].map((line) => (
-              <div key={line} className="flex items-center gap-3">
-                <div style={{ width: 4, height: 4, borderRadius: "50%", background: "#1C1C1A", flexShrink: 0 }} />
-                <span className="font-sans" style={{ fontSize: 14, color: "#5C5E57", letterSpacing: "0.01em" }}>
+              <div key={line} className="flex items-center gap-3 hero-bullet">
+                <div
+                  style={{ width: 4, height: 4, borderRadius: "50%", background: "#1C1C1A", flexShrink: 0 }}
+                />
+                <span
+                  className="font-sans"
+                  style={{ fontSize: 14, color: "#5C5E57", letterSpacing: "0.01em" }}
+                >
                   {line}
                 </span>
               </div>
             ))}
           </div>
 
-          <div
-            className="hero-copy-limited"
-            style={{
-              opacity: show(4) ? 1 : 0,
-              transform: show(4) ? "translateY(0)" : "translateY(8px)",
-              transition: "opacity 0.8s ease, transform 0.8s ease",
-            }}
-          >
+          <div className="hero-copy-limited hero-cta">
             <a
               href="#contacto"
               onClick={handleContactClick}
@@ -177,7 +227,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
     </section>
   );
 }

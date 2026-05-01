@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getAllArticulos } from "@/lib/articulos";
+import ArticulosAnimations from "./ArticulosAnimations";
 
 export default function ArticulosHome() {
   const articulos = getAllArticulos().slice(0, 3);
 
   return (
     <section id="articulos" style={{ background: "#FBF9F4", padding: "96px 0" }}>
+      <ArticulosAnimations />
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         <div
           className="flex flex-col md:flex-row md:items-end md:justify-between"
@@ -20,7 +22,7 @@ export default function ArticulosHome() {
               Artículos
             </p>
             <h2
-              className="font-serif"
+              className="font-serif section-title"
               style={{
                 fontSize: "clamp(28px, 3.5vw, 44px)",
                 fontWeight: 300,

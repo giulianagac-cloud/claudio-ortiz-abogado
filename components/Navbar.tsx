@@ -3,6 +3,10 @@
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const scrollLinks = [
   { label: "EXPERTISE", href: "servicios" },
@@ -21,6 +25,19 @@ export default function Navbar() {
     const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const trigger = ScrollTrigger.create({
+      trigger: "#contacto",
+      start: "top 68px",
+      end: "bottom 68px",
+      onEnter: () => gsap.to(".navbar-logo", { color: "#F5F4ED", duration: 0.3 }),
+      onLeave: () => gsap.to(".navbar-logo", { color: "#31332C", duration: 0.3 }),
+      onEnterBack: () => gsap.to(".navbar-logo", { color: "#F5F4ED", duration: 0.3 }),
+      onLeaveBack: () => gsap.to(".navbar-logo", { color: "#31332C", duration: 0.3 }),
+    });
+    return () => trigger.kill();
   }, []);
 
   useEffect(() => {
@@ -80,7 +97,7 @@ export default function Navbar() {
           className="cursor-pointer bg-transparent border-none p-0"
         >
           <span
-            className="font-serif italic"
+            className="font-serif italic navbar-logo"
             style={{ fontSize: 28, color: "#31332C", letterSpacing: "-0.01em" }}
           >
             Ortiz Alejandre

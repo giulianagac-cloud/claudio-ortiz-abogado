@@ -1,6 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const servicios = [
   {
@@ -45,27 +49,36 @@ export default function Servicios() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll(".fade-in").forEach((el, i) => {
-              setTimeout(() => el.classList.add("visible"), i * 100);
-            });
+    const ctx = gsap.context(() => {
+      // Cards reveal con stagger por columna
+      document.querySelectorAll(".servicio-card").forEach((card, i) => {
+        gsap.fromTo(
+          card,
+          { y: 40, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+            delay: (i % 3) * 0.1,
           }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
+        );
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
     <section id="servicios" style={{ background: "#F5F4ED", padding: "96px 0" }}>
       <div ref={sectionRef} className="max-w-7xl mx-auto px-6 md:px-10">
 
-        <div className="fade-in" style={{ marginBottom: 64 }}>
+        <div style={{ marginBottom: 64 }}>
           <p
             className="font-sans uppercase"
             style={{ fontSize: 10, letterSpacing: "0.18em", color: "#5C5E57", marginBottom: 16 }}
@@ -73,7 +86,7 @@ export default function Servicios() {
             Especialidades
           </p>
           <h2
-            className="font-serif"
+            className="font-serif section-title"
             style={{
               fontSize: "clamp(28px, 3.5vw, 44px)",
               fontWeight: 300,
@@ -93,7 +106,7 @@ export default function Servicios() {
           {servicios.map((s) => (
             <div
               key={s.numero}
-              className="fade-in"
+              className="servicio-card"
               style={{
                 background: "#F5F4ED",
                 padding: "48px 40px",
