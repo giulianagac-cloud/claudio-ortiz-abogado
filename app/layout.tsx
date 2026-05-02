@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     title: "Ortiz Alejandre — Derecho Corporativo para PyMEs",
     description: "Asesoramiento jurídico estratégico para empresas y PyMEs",
     url: "https://ortizalejandre.com",
+    type: "website",
     images: [
       {
         url: "https://ortizalejandre.com/og-image.png",
