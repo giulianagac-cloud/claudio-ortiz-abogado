@@ -6,6 +6,11 @@ export const metadata: Metadata = {
   title: "Ortiz Alejandre — Derecho Corporativo para PyMEs",
   description:
     "Asesoramiento jurídico estratégico para empresas y PyMEs. Derecho corporativo, gestión y transformación digital.",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
   openGraph: {
     title: "Ortiz Alejandre — Derecho Corporativo para PyMEs",
     description: "Asesoramiento jurídico estratégico para empresas y PyMEs",
@@ -29,9 +34,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <head>
-        <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
-      </head>
       <body>
         <SmoothScroll>{children}</SmoothScroll>
       </body>
