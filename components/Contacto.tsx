@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useForm } from "@formspree/react";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 type Fields = { nombre: string; email: string; empresa: string; mensaje: string };
 type FieldFlags = Record<keyof Fields, boolean>;
@@ -65,6 +66,7 @@ const falseFlags: FieldFlags = { nombre: false, email: false, empresa: false, me
 
 export default function Contacto() {
   const [state, handleFormspreeSubmit] = useForm("xzdogrwo");
+  const [turnstileToken, setTurnstileToken] = useState("");
   const [sentName, setSentName] = useState("");
   const [values, setValues] = useState<Fields>({ nombre: "", email: "", empresa: "", mensaje: "" });
   const [touched, setTouched] = useState<FieldFlags>({ ...falseFlags });
@@ -262,9 +264,15 @@ export default function Contacto() {
                   </div>
 
                   <div className="pt-2">
+                    <Turnstile
+                      siteKey="0x4AAAAAADJt3LL7xHVIY4by"
+                      onSuccess={(token) => setTurnstileToken(token)}
+                      options={{ theme: "light" }}
+                    />
+
                     <button
                       type="submit"
-                      disabled={state.submitting || hasVisibleErrors}
+                      disabled={state.submitting || hasVisibleErrors || !turnstileToken}
                       className="font-sans border-none"
                       style={{
                         fontSize: 10,
@@ -275,11 +283,12 @@ export default function Contacto() {
                         borderRadius: 1,
                         padding: "18px 44px",
                         width: "100%",
+                        marginTop: 16,
                         transition: "background 0.3s ease, opacity 0.3s ease",
-                        opacity: state.submitting || hasVisibleErrors ? 0.5 : 1,
-                        cursor: state.submitting || hasVisibleErrors ? "not-allowed" : "pointer",
+                        opacity: state.submitting || hasVisibleErrors || !turnstileToken ? 0.5 : 1,
+                        cursor: state.submitting || hasVisibleErrors || !turnstileToken ? "not-allowed" : "pointer",
                       }}
-                      onMouseEnter={(e) => { if (!state.submitting && !hasVisibleErrors) e.currentTarget.style.background = "#2C2C2A"; }}
+                      onMouseEnter={(e) => { if (!state.submitting && !hasVisibleErrors && turnstileToken) e.currentTarget.style.background = "#2C2C2A"; }}
                       onMouseLeave={(e) => { e.currentTarget.style.background = "#1C1C1A"; }}
                     >
                       {state.submitting ? "ENVIANDO..." : "SOLICITAR CONSULTA"}
