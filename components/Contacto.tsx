@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useForm } from "@formspree/react";
 
-type FormState = "idle" | "sending" | "sent" | "error";
 type Fields = { nombre: string; email: string; empresa: string; mensaje: string };
 type FieldFlags = Record<keyof Fields, boolean>;
 
@@ -64,7 +64,7 @@ function getBorderColor(field: keyof Fields, value: string, evaluated: boolean, 
 const falseFlags: FieldFlags = { nombre: false, email: false, empresa: false, mensaje: false };
 
 export default function Contacto() {
-  const [formState, setFormState] = useState<FormState>("idle");
+  const [state, handleFormspreeSubmit] = useForm("xzdogrwo");
   const [sentName, setSentName] = useState("");
   const [values, setValues] = useState<Fields>({ nombre: "", email: "", empresa: "", mensaje: "" });
   const [touched, setTouched] = useState<FieldFlags>({ ...falseFlags });
@@ -140,24 +140,8 @@ export default function Contacto() {
       return;
     }
 
-    setFormState("sending");
-    const form = e.currentTarget;
-    const data = new FormData(form);
-    try {
-      const res = await fetch(form.action, {
-        method: "POST",
-        body: data,
-        headers: { Accept: "application/json" },
-      });
-      if (res.ok) {
-        setSentName(values.nombre.trim().split(" ")[0]);
-        setFormState("sent");
-      } else {
-        setFormState("error");
-      }
-    } catch {
-      setFormState("error");
-    }
+    setSentName(values.nombre.trim().split(" ")[0]);
+    await handleFormspreeSubmit(e);
   };
 
   const fieldStyle = (field: keyof Fields): React.CSSProperties => ({
@@ -195,17 +179,12 @@ export default function Contacto() {
           <div className="md:col-span-3 fade-in">
             <div style={{ background: "#FFFFFF", padding: "48px 40px", borderRadius: 2, boxShadow: "0 8px 48px rgba(0,0,0,0.18)", border: "1px solid rgba(255,255,255,0.06)" }}>
 
-              {formState === "sent" ? (
+              {state.succeeded ? (
                 <p className="font-serif italic" style={{ fontSize: 20, color: "#31332C", textAlign: "center", lineHeight: 1.7 }}>
                   Gracias, {sentName}. Te contactamos en menos de 24 horas.
                 </p>
               ) : (
-                <form
-                  action="https://formspree.io/f/FORM_ID"
-                  method="POST"
-                  onSubmit={handleSubmit}
-                  className="space-y-10"
-                >
+                <form onSubmit={handleSubmit} className="space-y-10">
                   <div>
                     <label htmlFor="nombre" className="font-sans" style={labelStyle}>Nombre completo</label>
                     <input
@@ -285,7 +264,7 @@ export default function Contacto() {
                   <div className="pt-2">
                     <button
                       type="submit"
-                      disabled={formState === "sending" || hasVisibleErrors}
+                      disabled={state.submitting || hasVisibleErrors}
                       className="font-sans border-none"
                       style={{
                         fontSize: 10,
@@ -297,20 +276,20 @@ export default function Contacto() {
                         padding: "18px 44px",
                         width: "100%",
                         transition: "background 0.3s ease, opacity 0.3s ease",
-                        opacity: formState === "sending" || hasVisibleErrors ? 0.5 : 1,
-                        cursor: formState === "sending" || hasVisibleErrors ? "not-allowed" : "pointer",
+                        opacity: state.submitting || hasVisibleErrors ? 0.5 : 1,
+                        cursor: state.submitting || hasVisibleErrors ? "not-allowed" : "pointer",
                       }}
-                      onMouseEnter={(e) => { if (formState === "idle" && !hasVisibleErrors) e.currentTarget.style.background = "#2C2C2A"; }}
+                      onMouseEnter={(e) => { if (!state.submitting && !hasVisibleErrors) e.currentTarget.style.background = "#2C2C2A"; }}
                       onMouseLeave={(e) => { e.currentTarget.style.background = "#1C1C1A"; }}
                     >
-                      {formState === "sending" ? "ENVIANDO..." : "SOLICITAR CONSULTA"}
+                      {state.submitting ? "ENVIANDO..." : "SOLICITAR CONSULTA"}
                     </button>
 
                     <p className="font-sans" style={{ fontSize: 11, color: "#B1B3A9", letterSpacing: "0.05em", marginTop: 16 }}>
                       · Respondemos en 24 horas
                     </p>
 
-                    {formState === "error" && (
+                    {state.errors && (
                       <p className="mt-4 font-sans" style={{ fontSize: 13, color: "#C45C5C" }}>
                         Hubo un error al enviar. Intentá de nuevo o escribinos a{" "}
                         <a href="mailto:consultas@ortizalejandre.com" style={{ color: "#C45C5C", textDecoration: "underline" }}>
